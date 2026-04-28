@@ -13,11 +13,16 @@ class Pessoa{
     public:
         string nome;
         string trabalho;
+
         void exibirDados();
         string getTrabalho();
         void setTrabalho(string t);
         void setSenha(string s);
+
         Pessoa(string n,string t, string l,string s);
 };
+
+
+
 
 #endif
