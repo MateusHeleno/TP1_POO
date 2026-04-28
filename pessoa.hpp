@@ -6,23 +6,22 @@
 
 using namespace std;
 
-class Pessoa{
-    private:
-        string login;
-        string senha;
-    public:
-        string nome;
-        string trabalho;
+class Pessoa
+{
+private:
+    string login;
+    string senha;
 
-        void exibirDados();
-        string getTrabalho();
-        void setTrabalho(string t);
-        void setSenha(string s);
+public:
+    string nome;
+    string trabalho;
 
-        Pessoa(string n,string t, string l,string s);
+    virtual void exibirDados();
+    string getTrabalho();
+    void setTrabalho(string t);
+    void setSenha(string s);
+
+    Pessoa(string n, string t, string l, string s);
 };
-
-
-
 
 #endif
