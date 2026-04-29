@@ -62,7 +62,10 @@ void Transacao::setHorario(string h)
     horario = h;
 }
 
-//void Transacao::setClientes(Cliente *c)
+void Transacao::setClientes(Cliente *c)
+{
+    clientesEnvolvidos.push_back(c);
+}
 
 vector<Cliente *> Transacao::getClientes()
 {
@@ -90,9 +93,3 @@ void Transacao::exibirTransacao()
         }
     }
 }
-
-/*
-
-    void setClientes(Cliente *c);
-
-    */

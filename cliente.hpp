@@ -26,7 +26,6 @@ public:
     void exibirDados() override;
 
     // Métodos específicos do Cliente (Getters e Setters)
-    int getCliente();
     void setTransacao(Transacao *t);
     vector<Transacao *> getExtrato();
 

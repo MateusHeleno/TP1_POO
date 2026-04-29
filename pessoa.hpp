@@ -20,9 +20,11 @@ public:
     string getTrabalho();
     void setTrabalho(string t);
     void setSenha(string s);
+    string getSenha();
+    string getLogin();
 
-    Pessoa(string n, string t, string l, string s);
-    ~Pessoa(); // destrutor de classe virtual
+    Pessoa(string n = "NOME", string t = "TRABALHO", string l = "LOGIN", string s = "SENHA");
+    virtual ~Pessoa() = default; // destrutor de classe virtual
 };
 
 #endif

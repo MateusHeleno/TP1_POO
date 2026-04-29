@@ -5,7 +5,17 @@
 void Pessoa::setTrabalho(string t)
 {
     trabalho = t;
-};
+}
+
+string Pessoa::getSenha()
+{
+    return senha;
+}
+
+string Pessoa::getLogin()
+{
+    return login;
+}
 
 string Pessoa::getTrabalho()
 {
@@ -24,7 +34,7 @@ void Pessoa::exibirDados() // ESSA FUNCAO EH VIRTUAL
     cout << "Login: " << login << endl;
 }
 
-Pessoa::Pessoa(string n = "NOME", string t = "TRABALHO", string l = "LOGIN", string s = "SENHA") //inicializa com dados vazios se nao receber parametros
+Pessoa::Pessoa(string n, string t, string l, string s) //inicializa com dados vazios se nao receber parametros
 {
     nome = n;
     trabalho = t;
