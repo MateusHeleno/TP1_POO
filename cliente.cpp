@@ -32,3 +32,27 @@ void Cliente::exibirDados()
 
     cout << "Total de transações realizadas: " << transacoes.size() << endl;
 }
+
+int Cliente::getCliente(){
+    
+}
+
+string Cliente::getTipoDeConta(){
+    return tipoDeConta;
+
+}
+
+void Cliente::setTipoDeConta(string tipo){
+
+    tipoDeConta = tipo;
+
+}
+
+double Cliente::getSaldo(){
+    return saldo;
+}
+
+void Cliente::setSaldo(double s){
+    saldo = s;
+
+}
