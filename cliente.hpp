@@ -15,7 +15,7 @@ private:
     string tipoDeConta;
     double taxaDeRendimento;
     double saldo;
-    vector<Transacao *> transacoes; // Coleção exigida pelo diagrama
+    vector<Transacao *> transacoes; // Coleção exigida pelo diagrama eh o extrato
 
 public:
     // Construtor: deve passar os parâmetros básicos para a classe Pessoa

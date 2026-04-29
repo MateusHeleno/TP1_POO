@@ -22,6 +22,7 @@ public:
     void setSenha(string s);
 
     Pessoa(string n, string t, string l, string s);
+    ~Pessoa(); // destrutor de classe virtual
 };
 
 #endif
