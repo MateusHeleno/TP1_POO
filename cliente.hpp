@@ -8,19 +8,17 @@
 
 using namespace std;
 
-class Cliente : public Pessoa
-{
+class Cliente : public Pessoa {
 private:
     double remuneracao;
-    string tipoDeConta;
     double taxaDeRendimento;
     double saldo;
+    string tipoDeConta;
     vector<Transacao *> transacoes; // Coleção exigida pelo diagrama eh o extrato
 
 public:
     // Construtor: deve passar os parâmetros básicos para a classe Pessoa
-    Cliente(string n, string t, string l, string s,
-            double rem, string tipo, double taxa, double sal);
+    Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal);
 
     // Sobrescrita do método exibirDados
     void exibirDados() override;

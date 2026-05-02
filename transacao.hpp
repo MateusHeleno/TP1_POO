@@ -8,11 +8,10 @@ using namespace std;
 
 class Cliente; // tem que avisar que a classe existe pra nao ter que chamar o arquivo aq
 
-class Transacao
-{
+class Transacao {
 private:
-    string tipo;
     double valor;
+    string tipo;
     string data;
     string horario;
     vector<Cliente *> clientesEnvolvidos; // Coleção de clientes exigida

@@ -6,22 +6,22 @@
 
 using namespace std;
 
-class Pessoa
-{
+class Pessoa {
 private:
     string login;
     string senha;
-
 public:
     string nome;
     string trabalho;
 
     virtual void exibirDados();
-    string getTrabalho();
     void setTrabalho(string t);
     void setSenha(string s);
+    void setNome(string n);
     string getSenha();
     string getLogin();
+    string getTrabalho();
+    string getNome();
 
     Pessoa(string n = "NOME", string t = "TRABALHO", string l = "LOGIN", string s = "SENHA");
     virtual ~Pessoa() = default; // destrutor de classe virtual

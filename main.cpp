@@ -14,7 +14,7 @@ using namespace std;
 int main() {
     int valor;
     do {
-        system("clear");
+        limparTerminal();
 
         cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO MASTER ====== " << endl;
         cout << "===== By Vorcaro =====" <<endl;
@@ -25,38 +25,50 @@ int main() {
         << "5.Associar gerente a cliente" << endl
         << "6.Listar clientes" << endl
         << "7.Listar gerentes" << endl
-        <<"8.Salvar dados e sair" << endl;
+        << "8.Salvar dados e sair" << endl;
         cout << "======================================================" << endl;
         valor = lerValor();
 
+        limparTerminal();
         switch (valor) {
-            case 1:
-                cout << "valor 1" << endl;
-                break;
+            case 1: {
+                Cliente cliente = cadastrarCliente();
+                cliente.exibirDados();
 
-            case 2:
                 break;
+            }
+            case 2: {
 
-            case 3:
                 break;
+            }
 
-            case 4:
+            case 3: {
                 break;
+            }
 
-            case 5:
+            case 4: {
                 break;
+            }
 
-            case 6:
+            case 5: {
                 break;
+            }
 
-            case 7:
+            case 6: {
                 break;
+            }
 
-            case 8:
+            case 7: {
                 break;
+            }
 
-            default:
+            case 8: {
                 break;
+            }
+
+            default: {
+                break;
+            }
         }
 
         if (valor != 8) {
