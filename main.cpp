@@ -7,38 +7,66 @@
 #include "cliente.hpp"
 #include "gerente.hpp"
 #include "transacao.hpp"
+#include "auxiliares.hpp"
 
 using namespace std;
 
-int main()
-{
-
-    while (true){
-        int valor;
-        cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO MASTER ====== " << endl;
-        cout<< "===== By Vorcaro =====" <<endl;
-        cout << "1.Cadastrar Cliente" << endl 
-        << "2.Cadastrar Gerente" << endl 
-        << "3.Criar transacao" << endl 
-        << "4.Exibir extrato de um Cliente" << 
-        endl << "5.Associar gerente a cliente" << 
-        endl << "6.Listar clientes" << endl 
-        << "7.Listar gerentes" << endl <<
-         "8.Salvar dados e sair" << endl;
-        cout << "======================================================" << endl;
-        cout <<"- ";
-        cin >> valor;
-
-        if(valor == 8){
-            break;
-        }
-
+int main() {
+    int valor;
+    do {
         system("clear");
 
-    }
-    
+        cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO MASTER ====== " << endl;
+        cout << "===== By Vorcaro =====" <<endl;
+        cout << "1.Cadastrar Cliente" << endl
+        << "2.Cadastrar Gerente" << endl
+        << "3.Criar transacao" << endl
+        << "4.Exibir extrato de um Cliente" << endl
+        << "5.Associar gerente a cliente" << endl
+        << "6.Listar clientes" << endl
+        << "7.Listar gerentes" << endl
+        <<"8.Salvar dados e sair" << endl;
+        cout << "======================================================" << endl;
+        valor = lerValor();
 
-    
+        switch (valor) {
+            case 1:
+                cout << "valor 1" << endl;
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            case 5:
+                break;
+
+            case 6:
+                break;
+
+            case 7:
+                break;
+
+            case 8:
+                break;
+
+            default:
+                break;
+        }
+
+        if (valor != 8) {
+            cout << endl
+                 << "Pressione Enter para voltar ao menu!" << endl;
+            cin.ignore(100, '\n');
+            cin.get();
+        }
+
+    } while (valor != 8);
 
     return 0;
 }
