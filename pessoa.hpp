@@ -7,13 +7,13 @@
 using namespace std;
 
 class Pessoa {
+protected:
+    string nome;
+    string trabalho;
 private:
     string login;
     string senha;
 public:
-    string nome;
-    string trabalho;
-
     virtual void exibirDados();
     void setTrabalho(string t);
     void setSenha(string s);

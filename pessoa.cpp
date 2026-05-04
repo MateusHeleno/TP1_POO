@@ -30,7 +30,7 @@ string Pessoa::getNome() {
 }
 
 void Pessoa::setSenha(string s) {
-    this->senha = s;
+    this->senha = s; 
 }
 
 void Pessoa::setNome(string n) {
