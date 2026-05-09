@@ -2,6 +2,7 @@
 #include <string>
 
 #include "cliente.hpp"
+#include "gerente.hpp"
 
 using namespace std;
 
@@ -60,4 +61,16 @@ Cliente cadastrarCliente() {
     cout << endl;
 
     return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo);
+}
+
+Gerente cadastrarGerente() {
+    string nome, trabalho, login, senha;
+
+    cout << "Nome: "; cin >> nome;
+    cout << "Trabalho: "; cin >> trabalho;
+    cout << "Login: "; cin >> login;
+    cout << "Senha: "; cin >> senha;
+
+
+    return Gerente(nome, trabalho, login, senha);
 }

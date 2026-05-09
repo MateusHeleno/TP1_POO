@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
+
 #include "pessoa.hpp"
 #include "cliente.hpp"
 #include "gerente.hpp"
@@ -38,6 +39,8 @@ int main() {
                 break;
             }
             case 2: {
+                Gerente gerente = cadastrarGerente();
+                gerente.exibirDados();
 
                 break;
             }
