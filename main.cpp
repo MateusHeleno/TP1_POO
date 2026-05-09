@@ -14,6 +14,9 @@ using namespace std;
 
 int main() {
     int valor;
+    vector<Cliente> clientes;
+    vector<Gerente> gerentes;
+
     do {
         limparTerminal();
 
@@ -33,14 +36,16 @@ int main() {
         limparTerminal();
         switch (valor) {
             case 1: {
-                Cliente cliente = cadastrarCliente();
-                cliente.exibirDados();
+                Cliente novoCliente = cadastrarCliente();
+                novoCliente.exibirDados();
+                clientes.push_back(novoCliente);
 
                 break;
             }
             case 2: {
-                Gerente gerente = cadastrarGerente();
-                gerente.exibirDados();
+                Gerente novoGerente = cadastrarGerente();
+                novoGerente.exibirDados();
+                gerentes.push_back(novoGerente);
 
                 break;
             }
@@ -66,6 +71,10 @@ int main() {
             }
 
             case 8: {
+                cout << "Salvando!" << endl;
+                // criar uma funcao que escreve no arquivo de gerentes e no de clientes
+                // write ou append?
+
                 break;
             }
 
