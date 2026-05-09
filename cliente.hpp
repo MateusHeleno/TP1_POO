@@ -17,13 +17,10 @@ private:
     vector<Transacao *> transacoes; // Coleção exigida pelo diagrama eh o extrato
 
 public:
-    // Construtor: deve passar os parâmetros básicos para a classe Pessoa
     Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal);
 
-    // Sobrescrita do método exibirDados
     void exibirDados() override;
 
-    // Métodos específicos do Cliente (Getters e Setters)
     void setTransacao(Transacao *t);
     vector<Transacao *> getExtrato();
 
@@ -35,6 +32,9 @@ public:
 
     double getRendimento();
     void setRendimento(double r);
+
+    // realiza sobrecarga do operador <<
+    friend ostream& operator<<(ostream& os, const Cliente& c);
 };
 
 #endif

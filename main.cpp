@@ -71,9 +71,9 @@ int main() {
             }
 
             case 8: {
-                cout << "Salvando!" << endl;
-                // criar uma funcao que escreve no arquivo de gerentes e no de clientes
-                // write ou append?
+                cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
+                escreverCSV("clientes.csv", clientes);
+                escreverCSV("gerentes.csv", gerentes);
 
                 break;
             }

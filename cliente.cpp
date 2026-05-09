@@ -68,3 +68,16 @@ void Cliente::setRendimento(double r) {
     if (tipoConta == "poupança")
         taxaDeRendimento = r;
 }
+
+// realiza a sobrecarga do operador << para poder salvar os dados no arquivo csv usando {file << cliente} para melhor legibilidade do código
+ostream& operator<<(ostream& out, const Cliente& c) {
+    out << c.nome << ','
+    << c.trabalho << ','
+    << c.tipoDeConta << ','
+    << c.remuneracao << ','
+    << c.saldo << ','
+    << c.taxaDeRendimento
+    << endl;
+
+    return out;
+}
