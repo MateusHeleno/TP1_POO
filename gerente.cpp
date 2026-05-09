@@ -23,3 +23,11 @@ void Gerente::exibirDados() {
         cliente->exibirDados();
     }
 }
+
+ostream& operator<<(ostream& out, const Gerente& g) {
+    out << g.nome << ','
+    << g.trabalho
+    << endl;
+
+    return out;
+}

@@ -33,8 +33,12 @@ public:
     double getRendimento();
     void setRendimento(double r);
 
+    string getHeader() override {
+        return "nome,trabalho,conta,remuneracao,saldo,taxa_rendimento";
+    }
+
     // realiza sobrecarga do operador <<
-    friend ostream& operator<<(ostream& os, const Cliente& c);
+    friend ostream& operator<<(ostream& out, const Cliente& c);
 };
 
 #endif

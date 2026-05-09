@@ -23,6 +23,8 @@ public:
     string getTrabalho();
     string getNome();
 
+    virtual string getHeader() = 0;
+
     Pessoa(string n = "NOME", string t = "TRABALHO", string l = "LOGIN", string s = "SENHA");
     virtual ~Pessoa() = default; // destrutor de classe virtual
 };

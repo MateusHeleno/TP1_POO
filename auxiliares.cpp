@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 
 #include "pessoa.hpp"
 #include "cliente.hpp"
@@ -74,21 +75,4 @@ Gerente cadastrarGerente() {
     cout << "Senha: "; cin >> senha;
 
     return Gerente(nome, trabalho, login, senha);
-}
-
-template<typename T>
-void escreverCSV(const string arquivo, vector<T> vector) {
-    ofstream file(arquivo);
-    // cria o header do arquivo clientes.csv
-    if (typeid(vector).name == typeid(vector<Cliente>).name)
-        file << "nome,trabalho,conta,remuneracao,saldo,taxa_rendimento" << endl;
-
-    // cria o header do arquivo gerentes.csv
-    else if (typeid(vector).name == typeid(vector<Gerente>).name)
-        file << "nome,trabalho,clientes_vinculados"
-
-    for (auto& item: vector)
-        file << item;
-
-    file.close();
 }

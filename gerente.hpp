@@ -21,6 +21,12 @@ public:
 
     vector<Cliente *> getClientes();
     void setCliente(Cliente *c);
+
+    string getHeader() override {
+        return "nome,trabalho";
+    }
+
+    friend ostream& operator<<(ostream& out, const Gerente& g);
 };
 
 #endif
