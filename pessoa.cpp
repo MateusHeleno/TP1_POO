@@ -2,6 +2,8 @@
 #include <string>
 #include <iostream>
 
+#include "gerente.hpp"
+
 Pessoa::Pessoa(string n, string t, string l, string s) :
     nome(n),
     trabalho(t),
@@ -13,24 +15,28 @@ void Pessoa::setTrabalho(string t) {
     this->trabalho = t;
 }
 
-string Pessoa::getSenha() {
+string Pessoa::getSenha() const {
     return senha;
 }
 
-string Pessoa::getLogin() {
+string Pessoa::getLogin() const {
     return login;
 }
 
-string Pessoa::getTrabalho() {
+string Pessoa::getTrabalho() const {
     return trabalho;
 }
 
-string Pessoa::getNome() {
+string Pessoa::getNome() const {
     return nome;
 }
 
 void Pessoa::setSenha(string s) {
-    this->senha = s; 
+    this->senha = s;
+}
+
+void Pessoa::setLogin(string l) {
+    this->login = l;
 }
 
 void Pessoa::setNome(string n) {

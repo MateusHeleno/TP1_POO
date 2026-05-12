@@ -35,6 +35,7 @@ int main() {
 
         limparTerminal();
         switch (valor) {
+            // Cadastrar cliente
             case 1: {
                 Cliente novoCliente = cadastrarCliente();
                 novoCliente.exibirDados();
@@ -42,6 +43,7 @@ int main() {
 
                 break;
             }
+            // Cadastrar gerente
             case 2: {
                 Gerente novoGerente = cadastrarGerente();
                 novoGerente.exibirDados();
@@ -49,8 +51,10 @@ int main() {
 
                 break;
             }
-
+            // Criar transação
             case 3: {
+
+
                 break;
             }
 

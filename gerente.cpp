@@ -26,7 +26,9 @@ void Gerente::exibirDados() {
 
 ostream& operator<<(ostream& out, const Gerente& g) {
     out << g.nome << ','
-    << g.trabalho
+    << g.trabalho << ','
+    << g.getLogin() << ','
+    << g.getSenha() << ','
     << endl;
 
     return out;

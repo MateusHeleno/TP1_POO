@@ -23,7 +23,7 @@ public:
     void setCliente(Cliente *c);
 
     string getHeader() override {
-        return "nome,trabalho";
+        return "nome,trabalho,login,senha";
     }
 
     friend ostream& operator<<(ostream& out, const Gerente& g);

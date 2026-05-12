@@ -1,11 +1,11 @@
 #include "cliente.hpp"
 #include "transacao.hpp"
 #include "auxiliares.hpp"
+#include "pessoa.hpp"
 
 #include <iostream>
 #include <string>
 #include <vector>
-#include <cstring>
 
 Cliente::Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal):
     Pessoa(n, t, l, s),
@@ -71,8 +71,10 @@ void Cliente::setRendimento(double r) {
 
 // realiza a sobrecarga do operador << para poder salvar os dados no arquivo csv usando {file << cliente} para melhor legibilidade do código
 ostream& operator<<(ostream& out, const Cliente& c) {
-    out << c.nome << ','
-    << c.trabalho << ','
+    out << c.getNome() << ','
+    << c.getTrabalho() << ','
+    << c.getLogin() << ','
+    << c.getSenha() << ','
     << c.tipoDeConta << ','
     << c.remuneracao << ','
     << c.saldo << ','

@@ -34,7 +34,7 @@ public:
     void setRendimento(double r);
 
     string getHeader() override {
-        return "nome,trabalho,conta,remuneracao,saldo,taxa_rendimento";
+        return "nome,trabalho,login,senha,conta,remuneracao,saldo,taxa_rendimento";
     }
 
     // realiza sobrecarga do operador <<

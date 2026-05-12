@@ -17,11 +17,14 @@ public:
     virtual void exibirDados();
     void setTrabalho(string t);
     void setSenha(string s);
+    void setLogin(string l);
     void setNome(string n);
-    string getSenha();
-    string getLogin();
-    string getTrabalho();
-    string getNome();
+    string getSenha() const;
+    string getLogin() const;
+    string getTrabalho() const;
+    string getNome() const;
+
+    // friend void getInfoCSV(const Pessoa& p, Gerente& g);
 
     virtual string getHeader() = 0;
 
