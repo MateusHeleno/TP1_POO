@@ -31,6 +31,10 @@ void limparTerminal() {
     system("clear");
 }
 
+void limparBuffer() {
+    cin.ignore(100, '\n');
+}
+
 string toLowerString(string s) {
     // usando "auto" o compilador deduz automaticamente o tipo da varíavel e usando & passamos por referência, permitindo modificação no objeto
     for (auto& c: s)
@@ -47,4 +51,3 @@ Cliente* buscaCliente(vector<Cliente>& clientes, const string& nome) {
     cout << "Cliente " << nome << " não está presente na lista de clientes" << endl;
     return nullptr;
 }
-

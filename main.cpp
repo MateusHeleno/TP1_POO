@@ -57,8 +57,11 @@ int main() {
                 Transacao* t = criarTransacao(clientes);
                 if (t != nullptr) {
                     transacoes.push_back(*t);
+                    t->exibirTransacao();
+                    
                     delete t;
                 }
+
 
                 break;
             }
@@ -84,8 +87,6 @@ int main() {
                 escreverCSV("clientes.csv", clientes);
                 escreverCSV("gerentes.csv", gerentes);
 
-
-
                 break;
             }
 
@@ -97,8 +98,7 @@ int main() {
         if (valor != 8) {
             cout << endl
                  << "Pressione Enter para voltar ao menu!" << endl;
-            cin.ignore(100, '\n');
-            cin.get();
+            limparBuffer();
         }
 
     } while (valor != 8);

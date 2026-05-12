@@ -12,12 +12,16 @@
 
 int lerValor();
 void limparTerminal();
+void limparBuffer();
 string toLowerString(string s);
 Cliente* buscaCliente(vector<Cliente>& clientes, const string& nome);
 
 // o template é um tipo genérico que permite a função trabalhar com tipos genéricos, o que permite escrever uma função ao invés de duas ou mais pra tipos diferentes
 template<typename T>
 void escreverCSV(const string arquivo, vector<T> vec) {
+    if (vec.empty())
+        return;
+
     ofstream file(arquivo);
 
     file << vec[0].getHeader() << endl;

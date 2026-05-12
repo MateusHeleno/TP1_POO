@@ -87,6 +87,8 @@ Transacao* criarTransacao(vector<Cliente>& clientes) {
     // se o tipo é transferência, precisamos do nome dos clientes que estão envolvidos na transação e verificar se eles estão no vetor de clientes
     if (toLowerString(tipo) == "transferencia") {
         string pessoa1, pessoa2;
+        limparBuffer();
+
         cout << "Cliente 1: "; getline(cin, pessoa1); // usa o getline para pegar nomes que possuem espaço
         cout << "Cliente 2: "; getline(cin, pessoa2);
 
@@ -95,6 +97,7 @@ Transacao* criarTransacao(vector<Cliente>& clientes) {
         if (c1 == nullptr || c2 == nullptr)
             return nullptr;
 
+        // apos verificar se ambos estão na lista de clientes podemos adicioná-los a transação
         t.setClientes(c1);
         t.setClientes(c2);
     }
