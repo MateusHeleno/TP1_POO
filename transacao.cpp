@@ -84,23 +84,41 @@ Transacao* criarTransacao(vector<Cliente>& clientes) {
     cout << "Horário: "; cin >> horario;
 
     Transacao t(tipo, valor, data, horario);
-    // se o tipo é transferência, precisamos do nome dos clientes que estão envolvidos na transação e verificar se eles estão no vetor de clientes
+
     if (toLowerString(tipo) == "transferencia") {
-        string pessoa1, pessoa2;
-        limparBuffer();
-
-        cout << "Cliente 1: "; getline(cin, pessoa1); // usa o getline para pegar nomes que possuem espaço
-        cout << "Cliente 2: "; getline(cin, pessoa2);
-
-        Cliente* c1 = buscaCliente(clientes, pessoa1);
-        Cliente* c2 = buscaCliente(clientes, pessoa2);
-        if (c1 == nullptr || c2 == nullptr)
+        if (!processarTransferencia(t, clientes, valor))
             return nullptr;
-
-        // apos verificar se ambos estão na lista de clientes podemos adicioná-los a transação
-        t.setClientes(c1);
-        t.setClientes(c2);
     }
 
     return new Transacao(t);
+}
+
+
+// se o tipo é transferência, precisamos do nome dos clientes que estão envolvidos na transação e verificar se eles estão no vetor de clientes
+bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valor) {
+    string pessoa1, pessoa2;
+
+    limparBuffer();
+    cout << "Cliente 1 (Pagador): ";  getline(cin, pessoa1);
+    cout << "Cliente 2 (Destinatário): "; getline(cin, pessoa2);
+
+    Cliente *c1 = buscaCliente(clientes, pessoa1);
+    Cliente *c2 = buscaCliente(clientes, pessoa2);
+    if (c1 == nullptr || c2 == nullptr)
+        return false;
+
+    if (!verificaSaldo(*c1, valor))
+        return false;
+
+    t.setClientes(c1);
+    t.setClientes(c2);
+    return true;
+}
+
+bool verificaSaldo(Cliente &c, double valor) {
+    if (c.getSaldo() - valor < 0) {
+        cout << "Você não tem saldo suficiente para essa operação." << endl;
+        return false;
+    }
+    return true;
 }

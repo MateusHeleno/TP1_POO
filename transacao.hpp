@@ -39,5 +39,7 @@ public:
 };
 
 Transacao* criarTransacao(vector<Cliente>& clientes);
+bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valor);
+bool verificaSaldo(Cliente& c, double valor);
 
 #endif
