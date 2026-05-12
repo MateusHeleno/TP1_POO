@@ -41,4 +41,6 @@ public:
     friend ostream& operator<<(ostream& out, const Cliente& c);
 };
 
+Cliente cadastrarCliente();
+
 #endif

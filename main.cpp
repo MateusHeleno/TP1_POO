@@ -16,6 +16,7 @@ int main() {
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
+    vector<Transacao> transacoes;
 
     do {
         limparTerminal();
@@ -53,7 +54,11 @@ int main() {
             }
             // Criar transação
             case 3: {
-
+                Transacao* t = criarTransacao(clientes);
+                if (t != nullptr) {
+                    transacoes.push_back(*t);
+                    delete t;
+                }
 
                 break;
             }
@@ -78,6 +83,8 @@ int main() {
                 cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
                 escreverCSV("clientes.csv", clientes);
                 escreverCSV("gerentes.csv", gerentes);
+
+
 
                 break;
             }

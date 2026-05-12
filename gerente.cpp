@@ -33,3 +33,15 @@ ostream& operator<<(ostream& out, const Gerente& g) {
 
     return out;
 }
+
+Gerente cadastrarGerente() {
+    string nome, trabalho, login, senha;
+
+    cout << "Nome: "; cin >> nome;
+    cout << "Trabalho: "; cin >> trabalho;
+    cout << "Login: "; cin >> login;
+    cout << "Senha: "; cin >> senha;
+
+    return Gerente(nome, trabalho, login, senha);
+}
+

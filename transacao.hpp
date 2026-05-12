@@ -17,8 +17,6 @@ private:
     vector<Cliente *> clientesEnvolvidos; // Coleção de clientes exigida
 
 public:
-    // Construtor (opcionalmente você pode passar os clientes envolvidos já aqui,
-    // mas deixei o básico de acordo com os atributos simples)
     Transacao(string t, double v, string d, string h);
 
     // Métodos Getters e Setters de acordo com o UML
@@ -39,5 +37,7 @@ public:
     // Método para exibir as informações da transação
     void exibirTransacao();
 };
+
+Transacao* criarTransacao(vector<Cliente>& clientes);
 
 #endif

@@ -29,4 +29,6 @@ public:
     friend ostream& operator<<(ostream& out, const Gerente& g);
 };
 
+Gerente cadastrarGerente();
+
 #endif

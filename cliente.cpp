@@ -83,3 +83,31 @@ ostream& operator<<(ostream& out, const Cliente& c) {
 
     return out;
 }
+
+Cliente cadastrarCliente() {
+    string nome, trabalho, login, senha, tipoDeConta;
+    double remuneracao, taxaRendimento, saldo;
+
+    cout << "Nome: "; cin >> nome;
+    cout << "Trabalho: "; cin >> trabalho;
+    cout << "Login: "; cin >> login;
+    cout << "Senha: "; cin >> senha;
+
+    cout << "Tipo de conta: "; cin >> tipoDeConta;
+    while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente") {
+        cout << "Tipos disponíveis: Poupança ou Corrente" << endl;
+        cout << "Tipo de Conta: "; cin >> tipoDeConta;
+    }
+
+    cout << "Remuneração: "; cin >> remuneracao;
+
+    taxaRendimento = 0.0;
+    if (toLowerString(tipoDeConta) == "poupança") {
+        cout << "Taxa de Rendimento: "; cin >> taxaRendimento;
+    }
+
+    cout << "Saldo: "; cin >> saldo;
+    cout << endl;
+
+    return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo);
+}
