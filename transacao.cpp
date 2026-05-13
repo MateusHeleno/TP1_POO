@@ -85,14 +85,16 @@ Transacao* criarTransacao(vector<Cliente>& clientes) {
 
     Transacao t(tipo, valor, data, horario);
 
-    if (toLowerString(tipo) == "transferencia") {
+    if (toLowerString(tipo) == "transferencia")
         if (!processarTransferencia(t, clientes, valor))
             return nullptr;
-    }
+
+    else if (toLowerString(tipo) == "saque")
+        if (!processarSaque(t, clientes, valor))
+            return nullptr;
 
     return new Transacao(t);
 }
-
 
 // se o tipo é transferência, precisamos do nome dos clientes que estão envolvidos na transação e verificar se eles estão no vetor de clientes
 bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valor) {
@@ -115,10 +117,34 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
     return true;
 }
 
+bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
+    string pessoa;
+    limparBuffer();
+    cout << "Nome do dono da conta: "; getline(cin, pessoa);
+
+    Cliente *c = buscaCliente(clientes, pessoa);
+    if (c == nullptr)
+        return false;
+
+    if (!verificaSaldo(*c, valor))
+        return false;
+
+    atualizaSaldo(*c, valor);
+    t.setClientes(c);
+
+    return true;
+}
+
 bool verificaSaldo(Cliente &c, double valor) {
     if (c.getSaldo() - valor < 0) {
         cout << "Você não tem saldo suficiente para essa operação." << endl;
         return false;
     }
     return true;
+}
+
+void atualizaSaldo(Cliente& c, double valor) {
+    double saldoAtual = c.getSaldo();
+    double novoSaldo = saldoAtual - valor;
+    c.setSaldo(novoSaldo);
 }
