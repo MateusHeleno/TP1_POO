@@ -85,13 +85,25 @@ Transacao* criarTransacao(vector<Cliente>& clientes) {
 
     Transacao t(tipo, valor, data, horario);
 
-    if (toLowerString(tipo) == "transferencia")
+    if (toLowerString(tipo) == "transferencia") {
         if (!processarTransferencia(t, clientes, valor))
             return nullptr;
+    }
 
-    else if (toLowerString(tipo) == "saque")
+    else if (toLowerString(tipo) == "saque") {
         if (!processarSaque(t, clientes, valor))
             return nullptr;
+    }
+
+    else if (toLowerString(tipo) == "deposito") {
+        if (!processarDeposito(t, clientes, valor))
+            return nullptr;
+    }
+
+    else {
+        cout << "Tipo de transação inválido. Os tipos disponíveis são: Transferência, Saque e Depósito" << endl;
+        return nullptr;
+    }
 
     return new Transacao(t);
 }
@@ -112,6 +124,9 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
     if (!verificaSaldo(*c1, valor))
         return false;
 
+    c1->setSaldo(c1->getSaldo() - valor);
+    c2->setSaldo(c2->getSaldo() + valor);
+
     t.setClientes(c1);
     t.setClientes(c2);
     return true;
@@ -129,7 +144,23 @@ bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
     if (!verificaSaldo(*c, valor))
         return false;
 
-    atualizaSaldo(*c, valor);
+    c->setSaldo(c->getSaldo() - valor);
+    t.setClientes(c);
+
+    return true;
+}
+
+bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor) {
+    string pessoa;
+    limparBuffer();
+    cout << "Nome do dono da conta: ";
+    getline(cin, pessoa);
+
+    Cliente *c = buscaCliente(clientes, pessoa);
+    if (c == nullptr)
+        return false;
+
+    c->setSaldo(c->getSaldo() + valor);
     t.setClientes(c);
 
     return true;
@@ -141,10 +172,4 @@ bool verificaSaldo(Cliente &c, double valor) {
         return false;
     }
     return true;
-}
-
-void atualizaSaldo(Cliente& c, double valor) {
-    double saldoAtual = c.getSaldo();
-    double novoSaldo = saldoAtual - valor;
-    c.setSaldo(novoSaldo);
 }
