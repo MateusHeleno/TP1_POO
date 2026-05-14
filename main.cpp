@@ -58,15 +58,16 @@ int main() {
                 if (t != nullptr) {
                     transacoes.push_back(*t);
                     t->exibirTransacao();
-                    
+
                     delete t;
                 }
 
-
                 break;
             }
-
+            // Exibir extrato de um cliente
             case 4: {
+                mostrarDadosCliente(clientes);
+
                 break;
             }
 

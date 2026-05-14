@@ -30,6 +30,8 @@ void Cliente::exibirDados() {
         cout << "Taxa de Rendimento: " << taxaDeRendimento << "%" << endl;
 
     cout << "Total de transações realizadas: " << transacoes.size() << endl;
+    for (auto &t: transacoes)
+        t->exibirTransacao();
 }
 
 string Cliente::getTipoDeConta() {
@@ -110,4 +112,16 @@ Cliente cadastrarCliente() {
     cout << endl;
 
     return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo);
+}
+
+void mostrarDadosCliente(vector <Cliente>& clientes) {
+    string nome;
+    limparBuffer();
+    cout << "Insira o nome do cliente: "; getline(cin, nome);
+
+    Cliente *cliente = buscaCliente(clientes, nome);
+    if (cliente == nullptr)
+        return;
+
+    cliente->exibirDados();
 }

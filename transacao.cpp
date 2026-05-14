@@ -124,6 +124,8 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
     if (!verificaSaldo(*c1, valor))
         return false;
 
+    c1->setTransacao(&t);
+    c2->setTransacao(&t);
     c1->setSaldo(c1->getSaldo() - valor);
     c2->setSaldo(c2->getSaldo() + valor);
 
@@ -144,6 +146,7 @@ bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
     if (!verificaSaldo(*c, valor))
         return false;
 
+    c->setTransacao(&t);
     c->setSaldo(c->getSaldo() - valor);
     t.setClientes(c);
 
@@ -160,6 +163,7 @@ bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor) {
     if (c == nullptr)
         return false;
 
+    c->setTransacao(&t);
     c->setSaldo(c->getSaldo() + valor);
     t.setClientes(c);
 

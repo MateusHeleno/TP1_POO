@@ -42,5 +42,6 @@ public:
 };
 
 Cliente cadastrarCliente();
+void mostrarDadosCliente(vector<Cliente>& clientes);
 
 #endif
