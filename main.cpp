@@ -15,6 +15,7 @@ using namespace std;
 int main() {
     int valor;
     vector<Cliente> clientes;
+    clientes.reserve(100);
     vector<Gerente> gerentes;
     vector<Transacao> transacoes;
 
@@ -57,6 +58,10 @@ int main() {
                 Transacao* t = criarTransacao(clientes);
                 if (t != nullptr) {
                     transacoes.push_back(*t);
+
+                    Transacao* tNoVetor = &transacoes.back();
+                    for (Cliente* c : t->getClientes())
+                        c->setTransacao(tNoVetor);
                     t->exibirTransacao();
 
                     delete t;
