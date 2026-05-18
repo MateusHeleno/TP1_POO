@@ -9,8 +9,8 @@
 #include <string>
 
 Transacao::Transacao(string t, double v, string d, string h)
-    : tipo(t),
-      valor(v),
+    : valor(v),
+      tipo(t),
       data(d),
       horario(h)
 
@@ -18,46 +18,56 @@ Transacao::Transacao(string t, double v, string d, string h)
     // a classe foi inicializada acima
 }
 
-string Transacao::getTipo() {
+string Transacao::getTipo()
+{
     return tipo;
 }
 
-double Transacao::getValor() {
+double Transacao::getValor()
+{
     return valor;
 }
 
-void Transacao::setValor(double v) {
+void Transacao::setValor(double v)
+{
     if (v >= 0.001)
         valor = v;
     else
         cout << "Erro: Valor invalido";
 }
 
-string Transacao::getData() {
+string Transacao::getData()
+{
     return data;
 }
 
-void Transacao::setData(string d) {
+void Transacao::setData(string d)
+{
     data = d;
 }
 
-string Transacao::getHorario() {
+string Transacao::getHorario()
+{
     return horario;
 }
 
-void Transacao::setHorario(string h) {
+void Transacao::setHorario(string h)
+{
     horario = h;
 }
 
-void Transacao::setClientes(Cliente *c) {
+void Transacao::setClientes(Cliente *c)
+{
     clientesEnvolvidos.push_back(c);
 }
 
-vector<Cliente *> Transacao::getClientes() {
+vector<Cliente *> Transacao::getClientes()
+{
     return clientesEnvolvidos; // ja eh a colecao de clientes envolvidos completa
 }
 
-void Transacao::exibirTransacao() {
+void Transacao::exibirTransacao()
+{
     cout << "Tipo: " << tipo << endl
          << "Valor: R$ " << valor << endl
          << "Data: " << data << endl
@@ -68,39 +78,49 @@ void Transacao::exibirTransacao() {
     if (clientesEnvolvidos.empty()) // verifica se a lista esta vazia
         cout << "  Nenhum cliente registrado nesta transação." << endl;
     else
-        for (Cliente *cliente : clientesEnvolvidos) {
+        for (Cliente *cliente : clientesEnvolvidos)
+        {
             string nome = cliente->getNome();
             cout << "  - " << nome << endl; // o nome esta protegido na classe pessoa -> usamos getter
         }
 }
 
-Transacao* criarTransacao(vector<Cliente>& clientes) {
+Transacao *criarTransacao(vector<Cliente> &clientes)
+{
     double valor;
     string tipo, data, horario;
 
-    cout << "Tipo da Transação: "; cin >> tipo;
-    cout << "Valor: "; cin >> valor;
-    cout << "Data: "; cin >> data;
-    cout << "Horário: "; cin >> horario;
+    cout << "Tipo da Transação: ";
+    cin >> tipo;
+    cout << "Valor: ";
+    cin >> valor;
+    cout << "Data: ";
+    cin >> data;
+    cout << "Horário: ";
+    cin >> horario;
 
     Transacao t(tipo, valor, data, horario);
 
-    if (toLowerString(tipo) == "transferencia") {
+    if (toLowerString(tipo) == "transferencia")
+    {
         if (!processarTransferencia(t, clientes, valor))
             return nullptr;
     }
 
-    else if (toLowerString(tipo) == "saque") {
+    else if (toLowerString(tipo) == "saque")
+    {
         if (!processarSaque(t, clientes, valor))
             return nullptr;
     }
 
-    else if (toLowerString(tipo) == "deposito") {
+    else if (toLowerString(tipo) == "deposito")
+    {
         if (!processarDeposito(t, clientes, valor))
             return nullptr;
     }
 
-    else {
+    else
+    {
         cout << "Tipo de transação inválido. Os tipos disponíveis são: Transferência, Saque e Depósito" << endl;
         return nullptr;
     }
@@ -109,12 +129,15 @@ Transacao* criarTransacao(vector<Cliente>& clientes) {
 }
 
 // se o tipo é transferência, precisamos do nome dos clientes que estão envolvidos na transação e verificar se eles estão no vetor de clientes
-bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valor) {
+bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valor)
+{
     string pessoa1, pessoa2;
 
     limparBuffer();
-    cout << "Cliente 1 (Pagador): ";  getline(cin, pessoa1);
-    cout << "Cliente 2 (Destinatário): "; getline(cin, pessoa2);
+    cout << "Cliente 1 (Pagador): ";
+    getline(cin, pessoa1);
+    cout << "Cliente 2 (Destinatário): ";
+    getline(cin, pessoa2);
 
     Cliente *c1 = buscaCliente(clientes, pessoa1);
     Cliente *c2 = buscaCliente(clientes, pessoa2);
@@ -134,10 +157,12 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
     return true;
 }
 
-bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
+bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor)
+{
     string pessoa;
     limparBuffer();
-    cout << "Nome do dono da conta: "; getline(cin, pessoa);
+    cout << "Nome do dono da conta: ";
+    getline(cin, pessoa);
 
     Cliente *c = buscaCliente(clientes, pessoa);
     if (c == nullptr)
@@ -146,14 +171,15 @@ bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
     if (!verificaSaldo(*c, valor))
         return false;
 
-    //c->setTransacao(&t);
+    // c->setTransacao(&t);
     c->setSaldo(c->getSaldo() - valor);
     t.setClientes(c);
 
     return true;
 }
 
-bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor) {
+bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor)
+{
     string pessoa;
     limparBuffer();
     cout << "Nome do dono da conta: ";
@@ -170,8 +196,10 @@ bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor) {
     return true;
 }
 
-bool verificaSaldo(Cliente &c, double valor) {
-    if (c.getSaldo() - valor < 0) {
+bool verificaSaldo(Cliente &c, double valor)
+{
+    if (c.getSaldo() - valor < 0)
+    {
         cout << "Você não tem saldo suficiente para essa operação." << endl;
         return false;
     }
