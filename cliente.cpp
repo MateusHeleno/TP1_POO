@@ -96,8 +96,7 @@ ostream &operator<<(ostream &out, const Cliente &c)
     return out;
 }
 
-Cliente cadastrarCliente()
-{
+Cliente cadastrarCliente() {
     string nome, trabalho, login, senha, tipoDeConta;
     double remuneracao, taxaRendimento, saldo;
 
@@ -113,8 +112,7 @@ Cliente cadastrarCliente()
 
     cout << "Tipo de conta: ";
     cin >> tipoDeConta;
-    while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente")
-    {
+    while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente") {
         cout << "Tipos disponíveis: Poupança ou Corrente" << endl;
         cout << "Tipo de Conta: ";
         cin >> tipoDeConta;
@@ -124,8 +122,7 @@ Cliente cadastrarCliente()
     cin >> remuneracao;
 
     taxaRendimento = 0.0;
-    if (toLowerString(tipoDeConta) == "poupança")
-    {
+    if (toLowerString(tipoDeConta) == "poupança") {
         taxaRendimento = remuneracao * 0.05;
         cout << "Valor do Rendimento: " << taxaRendimento << endl;
     }
@@ -137,14 +134,13 @@ Cliente cadastrarCliente()
     return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo);
 }
 
-void mostrarDadosCliente(vector<Cliente> &clientes)
-{
+void mostrarDadosCliente(vector<Cliente> &clientes) {
     string nome;
     limparBuffer();
     cout << "Insira o nome do cliente: ";
     getline(cin, nome);
 
-    Cliente *cliente = buscaCliente(clientes, nome);
+    Cliente *cliente = buscaPessoa(clientes, nome);
     if (cliente == nullptr)
         return;
 

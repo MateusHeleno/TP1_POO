@@ -31,4 +31,14 @@ void escreverCSV(const string arquivo, vector<T> vec) {
     file.close();
 }
 
+template<typename T>
+T* buscaPessoa(vector <T>& pessoas, const string& nome) {
+    for (auto& pessoa: pessoas)
+        if (pessoa.getNome() == nome)
+            return &pessoa;
+
+    cout << "Pessoa " << nome << " não encontrada" << endl;
+    return nullptr;
+}
+
 #endif

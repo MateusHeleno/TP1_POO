@@ -16,12 +16,10 @@ int main()
 {
     int valor;
     vector<Cliente> clientes;
-    clientes.reserve(100);
     vector<Gerente> gerentes;
     vector<Transacao> transacoes;
 
-    do
-    {
+    do {
         limparTerminal();
 
         cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO MASTER ====== " << endl;
@@ -38,11 +36,9 @@ int main()
         valor = lerValor();
 
         limparTerminal();
-        switch (valor)
-        {
+        switch (valor) {
         // Cadastrar cliente
-        case 1:
-        {
+        case 1: {
             Cliente novoCliente = cadastrarCliente();
             novoCliente.exibirDados();
             clientes.push_back(novoCliente);
@@ -50,8 +46,7 @@ int main()
             break;
         }
         // Cadastrar gerente
-        case 2:
-        {
+        case 2: {
             Gerente novoGerente = cadastrarGerente();
             novoGerente.exibirDados();
             gerentes.push_back(novoGerente);
@@ -59,11 +54,9 @@ int main()
             break;
         }
         // Criar transação
-        case 3:
-        {
+        case 3:{
             Transacao *t = criarTransacao(clientes);
-            if (t != nullptr)
-            {
+            if (t != nullptr) {
                 transacoes.push_back(*t);
 
                 Transacao *tNoVetor = &transacoes.back();
@@ -77,44 +70,16 @@ int main()
             break;
         }
         // Exibir extrato de um cliente
-        case 4:
-        {
+        case 4: {
             mostrarDadosCliente(clientes);
 
             break;
         }
 
-        case 5:
-        {
-            string nomeG, nomeC;
-            limparBuffer();
-            cout << "Nome do Gerente: ";
-            getline(cin, nomeG);
-            cout << "Nome do Cliente: ";
-            getline(cin, nomeC);
+        // Associar cliente a gerente
+        case 5: {
+            vincularCliente(clientes, gerentes);
 
-            // Busca o gerente no vetor
-            Gerente *gEncontrado = nullptr;
-            for (Gerente &g : gerentes) // procura o gerente pelo nome
-            {
-                if (g.getNome() == nomeG)
-                {
-                    gEncontrado = &g; // Pega o endereço de memória do gerente no vetor
-                    break;
-                }
-            }
-            // Busca o cliente usando a sua função auxiliar já pronta
-            Cliente *cEncontrado = buscaCliente(clientes, nomeC);
-
-            if (gEncontrado == nullptr) // se nao encontrar o gerente
-            {
-                cout << "Gerente '" << nomeG << "' não encontrado no sistema." << endl;
-            }
-            else if (cEncontrado != nullptr) // se encontrar o cliente
-            {
-                gEncontrado->setCliente(cEncontrado); // adiciona o cliente ao gerente
-                cout << "Cliente '" << nomeC << "' associado com sucesso ao Gerente '" << nomeG << "'!" << endl;
-            }
             break;
         }
         case 6:

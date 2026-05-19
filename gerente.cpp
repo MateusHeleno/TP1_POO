@@ -1,5 +1,7 @@
 #include "gerente.hpp"
 #include "cliente.hpp"
+#include "auxiliares.hpp"
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -45,3 +47,28 @@ Gerente cadastrarGerente() {
     return Gerente(nome, trabalho, login, senha);
 }
 
+void vincularCliente(vector <Cliente>& clientes, vector <Gerente>& gerentes) {
+    string nomeG, nomeC;
+    limparBuffer();
+    cout << "Nome do Gerente: ";
+    getline(cin, nomeG);
+    cout << "Nome do Cliente: ";
+    getline(cin, nomeC);
+
+    Gerente *gEncontrado = buscaPessoa(gerentes, nomeG);
+    Cliente *cEncontrado = buscaPessoa(clientes, nomeC);
+    if (gEncontrado == nullptr || cEncontrado == nullptr)
+        return;
+
+    gEncontrado->setCliente(cEncontrado); // adiciona o cliente ao gerente
+    cout << "Cliente '" << nomeC << "' associado com sucesso ao Gerente '" << nomeG << "'!" << endl;
+}
+
+// Gerente* buscaGerente(vector <Gerente>& gerentes, const string nome) {
+//     for (auto& gerente: gerentes)
+//         if (gerente.getNome() == nome)
+//             return &gerente;
+
+//     cout << "Gerente " << nome << " não está presente na lista de gerentes" << endl;
+//     return nullptr;
+// }

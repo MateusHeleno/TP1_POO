@@ -30,5 +30,6 @@ public:
 };
 
 Gerente cadastrarGerente();
+void vincularCliente(vector <Cliente>& clientes, vector<Gerente>& gerentes);
 
 #endif
