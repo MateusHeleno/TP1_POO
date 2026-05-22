@@ -16,6 +16,8 @@ int main() {
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
+    clientes.reserve(100);
+    gerentes.reserve(100);
     vector<Transacao> transacoes;
 
     do {
