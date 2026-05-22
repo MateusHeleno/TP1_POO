@@ -1,14 +1,47 @@
 #ifndef CREDITO_HPP
 #define CREDITO_HPP
-#include "cliente.hpp"
-#include "gerente.hpp"
+
+#include <string>
+#include <vector>
+
+using namespace std;
+
+class Cliente;
+class Gerente;
+
+class CompraParcelada {
+private:
+    string descricao;
+    double valorTotal;
+    int quantidadeParcelas;
+    double valorParcela;
+    int parcelasPagas;
+
+public:
+    CompraParcelada(string descricao, double valorTotal, int quantidadeParcelas);
+
+    string getDescricao() const;
+    double getValorTotal() const;
+    int getQuantidadeParcelas() const;
+    double getValorParcela() const;
+    int getParcelasPagas() const;
+    int getParcelasRestantes() const;
+
+    bool estaQuitada() const;
+    void pagarUmaParcela();
+    void exibirCompra() const;
+};
 
 class CartaoCredito {
 private:
+
     double limiteTotal;
     double limiteDisponivel;
     double valorFatura;
     bool bloqueado;
+    bool faturaGerada;
+    vector<CompraParcelada> comprasParceladas;
+
 
 public:
     CartaoCredito();
@@ -24,21 +57,27 @@ public:
     void alterarLimite(double novoLimite);
     void bloquear();
     void desbloquear();
-
-    bool realizarCompra(double valor);
-    bool realizarCompraParcelada(double valorTotal, int parcelas);
+    void gerarFatura();
+    void exibirComprasParceladas() const;
     bool pagarFatura(double& saldoCliente);
     void exibirFatura() const;
+
+    //Parcelas
+    bool realizarCompraParcelada(string descricao, double valorTotal, int parcelas);
+
 };
 
 void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes);
 void criarCartaoParaCliente(vector<Cliente>& clientes, vector<Gerente>& gerentes);
 bool clienteVinculadoAoGerente(Gerente& gerente, Cliente* cliente);
 void bloquearCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes);
-void alterarLimite(double novoLimite);
+void desbloquearCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes);
 
-double getLimiteTotal();
-double getLimiteDisponivel();
 void alterarLimiteCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes);
+
+
+void realizarCompraParcelada(vector<Cliente>& clientes);
+void acessarFatura(vector<Cliente>& clientes);
+
 
 #endif

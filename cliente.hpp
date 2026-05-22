@@ -1,6 +1,7 @@
 #ifndef CLIENTE_HPP
 #define CLIENTE_HPP
 
+#include "credito.hpp"
 #include "pessoa.hpp"
 #include "transacao.hpp" // Necessário para o vector de transações
 #include <vector>
@@ -19,7 +20,7 @@ private:
     bool temCartao;
 
 public:
-    Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal);
+    Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal, bool temCartao);
 
     void exibirDados() override;
 

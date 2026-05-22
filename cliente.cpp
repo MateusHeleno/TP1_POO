@@ -7,13 +7,16 @@
 #include <string>
 #include <vector>
 
-Cliente::Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal) : Pessoa(n, t, l, s),
+Cliente::Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal, bool temCartao) : Pessoa(n, t, l, s),
                                                                                                              remuneracao(rem),
                                                                                                              taxaDeRendimento(taxa),
                                                                                                              saldo(sal),
                                                                                                              tipoDeConta(tipo),
-                                                                                                             temCartao(false)
+                                                                                                             temCartao(temCartao)
 {
+    if(temCartao == true){
+        cartao.criar(remuneracao);
+    }
 }
 
 void Cliente::exibirDados()
@@ -149,7 +152,7 @@ Cliente cadastrarCliente() {
     cin >> saldo;
     cout << endl;
 
-    return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo);
+    return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo, false);
 }
 
 void mostrarDadosCliente(vector<Cliente> &clientes) {
