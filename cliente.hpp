@@ -43,5 +43,6 @@ public:
 
 Cliente cadastrarCliente();
 void mostrarDadosCliente(vector<Cliente>& clientes);
+void listarCliente(vector <Cliente>& clientes);
 
 #endif

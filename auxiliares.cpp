@@ -42,12 +42,3 @@ string toLowerString(string s) {
 
     return s;
 }
-
-// Cliente* buscaCliente(vector<Cliente>& clientes, const string& nome) {
-//     for (auto& cliente: clientes)
-//         if (cliente.getNome() == nome)
-//             return &cliente;
-
-//     cout << "Cliente " << nome << " não está presente na lista de clientes" << endl;
-//     return nullptr;
-// }

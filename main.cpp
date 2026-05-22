@@ -12,8 +12,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
@@ -37,106 +36,76 @@ int main()
 
         limparTerminal();
         switch (valor) {
-        // Cadastrar cliente
-        case 1: {
-            Cliente novoCliente = cadastrarCliente();
-            novoCliente.exibirDados();
-            clientes.push_back(novoCliente);
+            // Cadastrar cliente
+            case 1: {
+                Cliente novoCliente = cadastrarCliente();
+                novoCliente.exibirDados();
+                clientes.push_back(novoCliente);
 
-            break;
-        }
-        // Cadastrar gerente
-        case 2: {
-            Gerente novoGerente = cadastrarGerente();
-            novoGerente.exibirDados();
-            gerentes.push_back(novoGerente);
-
-            break;
-        }
-        // Criar transação
-        case 3:{
-            Transacao *t = criarTransacao(clientes);
-            if (t != nullptr) {
-                transacoes.push_back(*t);
-
-                Transacao *tNoVetor = &transacoes.back();
-                for (Cliente *c : t->getClientes())
-                    c->setTransacao(tNoVetor);
-                t->exibirTransacao();
-
-                delete t;
+                break;
             }
+            // Cadastrar gerente
+            case 2: {
+                Gerente novoGerente = cadastrarGerente();
+                novoGerente.exibirDados();
+                gerentes.push_back(novoGerente);
 
-            break;
-        }
-        // Exibir extrato de um cliente
-        case 4: {
-            mostrarDadosCliente(clientes);
-
-            break;
-        }
-
-        // Associar cliente a gerente
-        case 5: {
-            vincularCliente(clientes, gerentes);
-
-            break;
-        }
-        case 6:
-        {
-            limparBuffer();
-            cout << "=== LISTA DE CLIENTES CADASTRADOS ===" << endl;
-            if (clientes.empty()) // verifica se o vetor esta vazio
-            {
-                cout << "Nenhum cliente cadastrado no sistema." << endl;
+                break;
             }
-            else
-            {
-                for (Cliente &c : clientes) // percorre todo o vetor e imprime clientes
-                {
-                    c.exibirDados();
-                    cout << "-----------------------------------" << endl;
+            // Criar transação
+            case 3:{
+                Transacao *t = criarTransacao(clientes);
+                if (t != nullptr) {
+                    transacoes.push_back(*t);
+
+                    Transacao *tNoVetor = &transacoes.back();
+                    for (Cliente *c : t->getClientes())
+                        c->setTransacao(tNoVetor);
+                    t->exibirTransacao();
+
+                    delete t;
                 }
+
+                break;
             }
-            break;
-        }
+            // Exibir extrato de um cliente
+            case 4: {
+                mostrarDadosCliente(clientes);
 
-        case 7:
-        {
-            limparBuffer();
-            cout << "=== LISTA DE GERENTES CADASTRADOS ===" << endl;
-            if (gerentes.empty())
-            {
-                cout << "Nenhum gerente cadastrado no sistema." << endl;
+                break;
             }
-            else
-            {
-                for (Gerente &g : gerentes)
-                {
-                    g.exibirDados();
-                    cout << "-----------------------------------" << endl;
-                }
+            // Associar cliente a gerente
+            case 5: {
+                vincularCliente(clientes, gerentes);
+
+                break;
             }
-            break;
+            case 6: {
+                listarCliente(clientes);
+
+                break;
+            }
+
+            case 7: {
+                listarGerentes(gerentes);
+
+                break;
+            }
+
+            case 8: {
+                cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
+                escreverCSV("clientes.csv", clientes);
+                escreverCSV("gerentes.csv", gerentes);
+
+                break;
+            }
+
+            default: {
+                break;
+            }
         }
 
-        case 8:
-        {
-            cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
-            escreverCSV("clientes.csv", clientes);
-            escreverCSV("gerentes.csv", gerentes);
-
-            break;
-        }
-
-        default:
-        {
-            break;
-        }
-        }
-
-        if (valor != 8)
-        {
+        if (valor != 8) {
             cout << endl
                  << "Pressione Enter para voltar ao menu!" << endl;
             limparBuffer();
