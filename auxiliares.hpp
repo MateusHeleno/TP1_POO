@@ -10,7 +10,7 @@
 #include "gerente.hpp"
 #include "transacao.hpp"
 
-int lerValor();
+int lerValor(int n);
 void limparTerminal();
 void limparBuffer();
 string toLowerString(string s);

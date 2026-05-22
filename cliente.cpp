@@ -2,7 +2,7 @@
 #include "transacao.hpp"
 #include "auxiliares.hpp"
 #include "pessoa.hpp"
-
+#include "credito.hpp"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,7 +11,8 @@ Cliente::Cliente(string n, string t, string l, string s, double rem, string tipo
                                                                                                              remuneracao(rem),
                                                                                                              taxaDeRendimento(taxa),
                                                                                                              saldo(sal),
-                                                                                                             tipoDeConta(tipo)
+                                                                                                             tipoDeConta(tipo),
+                                                                                                             temCartao(false)
 {
 }
 
@@ -70,6 +71,23 @@ vector<Transacao *> Cliente::getExtrato()
 double Cliente::getRendimento()
 {
     return taxaDeRendimento;
+}
+
+double Cliente::getRemuneracao() {
+    return remuneracao;
+}
+
+void Cliente::setRemuneracao(double novaRemuneracao) {
+    if (novaRemuneracao < 0) {
+        cout << "Erro: a remuneração não pode ser negativa." << endl;
+        return;
+    }
+
+    remuneracao = novaRemuneracao;
+
+    if (toLowerString(tipoDeConta) == "poupança") {
+        taxaDeRendimento = remuneracao * 0.05;
+    }
 }
 
 // só possui taxa de rendimento se o tipo da conta for poupança
@@ -145,4 +163,26 @@ void mostrarDadosCliente(vector<Cliente> &clientes) {
         return;
 
     cliente->exibirDados();
+}
+
+//Cartão de crédito -------------------------------------
+
+void Cliente::criarCartao() {
+    if (temCartao) {
+        cout << "Este cliente já possui cartão de crédito." << endl;
+        return;
+    }
+
+    cartao.criar(remuneracao);
+    temCartao = true;
+
+    cout << "Cartão criado com sucesso!" << endl;
+}
+
+bool Cliente::possuiCartao() const {
+    return temCartao;
+}
+
+CartaoCredito& Cliente::getCartao() {
+    return cartao;
 }

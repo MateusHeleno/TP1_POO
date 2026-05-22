@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int lerValor() {
+int lerValor(int n) {
     int valor;
     while (true) {
         cout << "- ";
@@ -20,10 +20,10 @@ int lerValor() {
             cin.ignore(100, '\n');
             cout << "Entrada inválida, digite um número: " << endl;
         }
-        else if (valor >= 1 && valor <= 8)
+        else if (valor >= 1 && valor <= n)
             return valor;
         else
-            cout << "Valor inválido! Escolha entre 1 e 8: " << endl;
+            cout << "Valor inválido! Escolha entre 1 e "<< n << ": "<< endl;
     }
 }
 
