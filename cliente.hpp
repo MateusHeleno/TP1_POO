@@ -58,5 +58,7 @@ bool clienteVinculadoAoGerente(Gerente& gerente, Cliente* cliente);
 Cliente cadastrarCliente();
 void mostrarDadosCliente(vector<Cliente>& clientes);
 double getRemuneracao();
+void listarCliente(vector <Cliente>& clientes);
+
 
 #endif

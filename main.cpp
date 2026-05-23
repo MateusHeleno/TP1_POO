@@ -17,6 +17,8 @@ int main()
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
+    clientes.reserve(100);
+    gerentes.reserve(100);
     vector<Transacao> transacoes;
 
     do {
@@ -85,39 +87,13 @@ int main()
         }
         case 6:
         {
-            limparBuffer();
-            cout << "=== LISTA DE CLIENTES CADASTRADOS ===" << endl;
-            if (clientes.empty()) // verifica se o vetor esta vazio
-            {
-                cout << "Nenhum cliente cadastrado no sistema." << endl;
-            }
-            else
-            {
-                for (Cliente &c : clientes) // percorre todo o vetor e imprime clientes
-                {
-                    c.exibirDados();
-                    cout << "-----------------------------------" << endl;
-                }
-            }
+            listarCliente(clientes);
             break;
         }
 
         case 7:
         {
-            limparBuffer();
-            cout << "=== LISTA DE GERENTES CADASTRADOS ===" << endl;
-            if (gerentes.empty())
-            {
-                cout << "Nenhum gerente cadastrado no sistema." << endl;
-            }
-            else
-            {
-                for (Gerente &g : gerentes)
-                {
-                    g.exibirDados();
-                    cout << "-----------------------------------" << endl;
-                }
-            }
+            listarGerentes(gerentes);
             break;
         }
 

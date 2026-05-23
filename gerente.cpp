@@ -64,11 +64,16 @@ void vincularCliente(vector <Cliente>& clientes, vector <Gerente>& gerentes) {
     cout << "Cliente '" << nomeC << "' associado com sucesso ao Gerente '" << nomeG << "'!" << endl;
 }
 
-// Gerente* buscaGerente(vector <Gerente>& gerentes, const string nome) {
-//     for (auto& gerente: gerentes)
-//         if (gerente.getNome() == nome)
-//             return &gerente;
+void listarGerentes(vector <Gerente>& gerentes) {
+    limparBuffer();
+    cout << "=== LISTA DE GERENTES CADASTRADOS ===" << endl;
+    if (gerentes.empty())
+        cout << "Nenhum gerente cadastrado no sistema." << endl;
 
-//     cout << "Gerente " << nome << " não está presente na lista de gerentes" << endl;
-//     return nullptr;
-// }
+    else {
+        for (Gerente &g : gerentes) {
+            g.exibirDados();
+            cout << "-----------------------------------" << endl;
+        }
+    }
+}
