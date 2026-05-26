@@ -8,7 +8,8 @@ using namespace std;
 
 class Cliente; // tem que avisar que a classe existe pra nao ter que chamar o arquivo aq
 
-class Transacao {
+class Transacao
+{
 private:
     double valor;
     string tipo;
@@ -17,7 +18,7 @@ private:
     vector<Cliente *> clientesEnvolvidos; // Coleção de clientes exigida
 
 public:
-    Transacao(string t, double v, string d, string h);
+    Transacao(const string &t, double v, const string &d, const string &h);
 
     // Métodos Getters e Setters de acordo com o UML
     string getTipo();
@@ -26,10 +27,10 @@ public:
     void setValor(double v);
 
     string getData();
-    void setData(string d);
+    void setData(const string &d);
 
     string getHorario();
-    void setHorario(string h);
+    void setHorario(const string &h);
 
     vector<Cliente *> getClientes();
     void setClientes(Cliente *c);
@@ -38,10 +39,10 @@ public:
     void exibirTransacao();
 };
 
-Transacao* criarTransacao(vector<Cliente>& clientes);
+Transacao *criarTransacao(vector<Cliente> &clientes);
 bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valor);
 bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor);
 bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor);
-bool verificaSaldo(Cliente& c, double valor);
+bool verificaSaldo(Cliente &c, double valor);
 
 #endif

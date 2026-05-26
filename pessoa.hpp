@@ -6,19 +6,24 @@
 
 using namespace std;
 
-class Pessoa {
+class Pessoa
+{
 protected:
     string nome;
     string trabalho;
+
 private:
     string login;
     string senha;
+
 public:
     virtual void exibirDados();
-    void setTrabalho(string t);
-    void setSenha(string s);
-    void setLogin(string l);
-    void setNome(string n);
+
+    void setTrabalho(string &t);
+    void setSenha(string &s);
+    void setLogin(string &l);
+    void setNome(string &n);
+
     string getSenha() const;
     string getLogin() const;
     string getTrabalho() const;
@@ -28,7 +33,7 @@ public:
 
     virtual string getHeader() = 0;
 
-    Pessoa(string n = "NOME", string t = "TRABALHO", string l = "LOGIN", string s = "SENHA");
+    Pessoa(const string &n = "NOME", const string &t = "TRABALHO", const string &l = "LOGIN", const string &s = "SENHA");
     virtual ~Pessoa() = default; // destrutor de classe virtual
 };
 

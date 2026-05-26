@@ -6,48 +6,63 @@
 #include <string>
 #include <vector>
 
-Gerente::Gerente(string n, string t, string l, string s): Pessoa(n,t,l,s) {}
+Gerente::Gerente(const string &n, const string &t, const string &l, const string &s)
+    : Pessoa(n, t, l, s)
+{
+    // o gerente foi construido na chamada
+}
 
-vector<Cliente*> Gerente::getClientes() {
+vector<Cliente *> Gerente::getClientes()
+{
     return clientes;
 }
 
-void Gerente::setCliente(Cliente* c) {
+void Gerente::setCliente(Cliente *c)
+{
     clientes.push_back(c);
 }
 
-void Gerente::exibirDados() {
+void Gerente::exibirDados()
+{
     Pessoa::exibirDados();
 
     std::cout << "Quantidade de clientes vinculados: " << clientes.size() << endl;
     std::cout << "Clientes vinculados: " << endl;
-    for (const auto& cliente: clientes) {
+    for (const auto &cliente : clientes)
+    {
         cliente->exibirDados();
     }
 }
 
-ostream& operator<<(ostream& out, const Gerente& g) {
+ostream &operator<<(ostream &out, const Gerente &g)
+{
     out << g.nome << ','
-    << g.trabalho << ','
-    << g.getLogin() << ','
-    << g.getSenha() << ','
-    << endl;
+        << g.trabalho << ','
+        << g.getLogin() << ','
+        << g.getSenha() << ','
+        << endl;
 
     return out;
 }
 
-Gerente cadastrarGerente() {
+Gerente cadastrarGerente()
+{
     string nome, trabalho, login, senha;
 
-    cout << "Nome: "; cin >> nome;
-    cout << "Trabalho: "; cin >> trabalho;
-    cout << "Login: "; cin >> login;
-    cout << "Senha: "; cin >> senha;
+    cout << "Nome: ";
+    cin >> nome;
+    cout << "Trabalho: ";
+    cin >> trabalho;
+    cout << "Login: ";
+    cin >> login;
+    cout << "Senha: ";
+    cin >> senha;
 
     return Gerente(nome, trabalho, login, senha);
 }
 
-void vincularCliente(vector <Cliente>& clientes, vector <Gerente>& gerentes) {
+void vincularCliente(vector<Cliente> &clientes, vector<Gerente> &gerentes)
+{
     string nomeG, nomeC;
     limparBuffer();
     cout << "Nome do Gerente: ";
@@ -64,14 +79,17 @@ void vincularCliente(vector <Cliente>& clientes, vector <Gerente>& gerentes) {
     cout << "Cliente '" << nomeC << "' associado com sucesso ao Gerente '" << nomeG << "'!" << endl;
 }
 
-void listarGerentes(vector <Gerente>& gerentes) {
+void listarGerentes(vector<Gerente> &gerentes)
+{
     limparBuffer();
     cout << "=== LISTA DE GERENTES CADASTRADOS ===" << endl;
     if (gerentes.empty())
         cout << "Nenhum gerente cadastrado no sistema." << endl;
 
-    else {
-        for (Gerente &g : gerentes) {
+    else
+    {
+        for (Gerente &g : gerentes)
+        {
             g.exibirDados();
             cout << "-----------------------------------" << endl;
         }

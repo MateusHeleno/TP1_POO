@@ -7,14 +7,16 @@
 #include <string>
 #include <vector>
 
-Cliente::Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal, bool temCartao) : Pessoa(n, t, l, s),
-                                                                                                             remuneracao(rem),
-                                                                                                             taxaDeRendimento(taxa),
-                                                                                                             saldo(sal),
-                                                                                                             tipoDeConta(tipo),
-                                                                                                             temCartao(temCartao)
+Cliente::Cliente(const string &n, const string &t, const string &l, const string &s,
+                 double rem, const string &tipo, double taxa, double sal, bool temCartao) : Pessoa(n, t, l, s),
+                                                                                            remuneracao(rem),
+                                                                                            taxaDeRendimento(taxa),
+                                                                                            saldo(sal),
+                                                                                            tipoDeConta(tipo),
+                                                                                            temCartao(temCartao)
 {
-    if(temCartao == true){
+    if (temCartao == true)
+    {
         cartao.criar(remuneracao);
     }
 }
@@ -44,7 +46,7 @@ string Cliente::getTipoDeConta()
     return tipoDeConta;
 }
 
-void Cliente::setTipoDeConta(string tipo)
+void Cliente::setTipoDeConta(const string &tipo)
 {
     tipoDeConta = tipo;
     if (toLowerString(tipoDeConta) == "corrente")
@@ -76,19 +78,23 @@ double Cliente::getRendimento()
     return taxaDeRendimento;
 }
 
-double Cliente::getRemuneracao() {
+double Cliente::getRemuneracao()
+{
     return remuneracao;
 }
 
-void Cliente::setRemuneracao(double novaRemuneracao) {
-    if (novaRemuneracao < 0) {
+void Cliente::setRemuneracao(double novaRemuneracao)
+{
+    if (novaRemuneracao < 0)
+    {
         cout << "Erro: a remuneração não pode ser negativa." << endl;
         return;
     }
 
     remuneracao = novaRemuneracao;
 
-    if (toLowerString(tipoDeConta) == "poupança") {
+    if (toLowerString(tipoDeConta) == "poupança")
+    {
         taxaDeRendimento = remuneracao * 0.05;
     }
 }
@@ -117,7 +123,8 @@ ostream &operator<<(ostream &out, const Cliente &c)
     return out;
 }
 
-Cliente cadastrarCliente() {
+Cliente cadastrarCliente()
+{
     string nome, trabalho, login, senha, tipoDeConta;
     double remuneracao, taxaRendimento, saldo;
 
@@ -133,7 +140,8 @@ Cliente cadastrarCliente() {
 
     cout << "Tipo de conta: ";
     cin >> tipoDeConta;
-    while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente") {
+    while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente")
+    {
         cout << "Tipos disponíveis: Poupança ou Corrente" << endl;
         cout << "Tipo de Conta: ";
         cin >> tipoDeConta;
@@ -143,7 +151,8 @@ Cliente cadastrarCliente() {
     cin >> remuneracao;
 
     taxaRendimento = 0.0;
-    if (toLowerString(tipoDeConta) == "poupança") {
+    if (toLowerString(tipoDeConta) == "poupança")
+    {
         taxaRendimento = remuneracao * 0.05;
         cout << "Valor do Rendimento: " << taxaRendimento << endl;
     }
@@ -155,22 +164,25 @@ Cliente cadastrarCliente() {
     return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo, false);
 }
 
-void listarCliente(vector <Cliente>& clientes) {
+void listarCliente(vector<Cliente> &clientes)
+{
     limparBuffer();
     cout << "=== LISTA DE CLIENTES CADASTRADOS ===" << endl;
     if (clientes.empty())
         cout << "Nenhum cliente cadastrado no sistema." << endl;
 
-    else {
-        for (Cliente &c : clientes) {
+    else
+    {
+        for (Cliente &c : clientes)
+        {
             c.exibirDados();
             cout << "-----------------------------------" << endl;
         }
     }
 }
 
-
-void mostrarDadosCliente(vector<Cliente> &clientes) {
+void mostrarDadosCliente(vector<Cliente> &clientes)
+{
     string nome;
     limparBuffer();
     cout << "Insira o nome do cliente: ";
@@ -183,10 +195,12 @@ void mostrarDadosCliente(vector<Cliente> &clientes) {
     cliente->exibirDados();
 }
 
-//Cartão de crédito -------------------------------------
+// Cartão de crédito -------------------------------------
 
-void Cliente::criarCartao() {
-    if (temCartao) {
+void Cliente::criarCartao()
+{
+    if (temCartao)
+    {
         cout << "Este cliente já possui cartão de crédito." << endl;
         return;
     }
@@ -197,10 +211,12 @@ void Cliente::criarCartao() {
     cout << "Cartão criado com sucesso!" << endl;
 }
 
-bool Cliente::possuiCartao() const {
+bool Cliente::possuiCartao() const
+{
     return temCartao;
 }
 
-CartaoCredito& Cliente::getCartao() {
+CartaoCredito &Cliente::getCartao()
+{
     return cartao;
 }

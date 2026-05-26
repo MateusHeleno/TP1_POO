@@ -9,7 +9,8 @@
 
 using namespace std;
 
-class Cliente : public Pessoa {
+class Cliente : public Pessoa
+{
 private:
     double remuneracao;
     double taxaDeRendimento;
@@ -20,7 +21,8 @@ private:
     bool temCartao;
 
 public:
-    Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal, bool temCartao);
+    Cliente(const string &n, const string &t, const string &l, const string &s,
+            double rem, const string &tipo, double taxa, double sal, bool temCartao);
 
     void exibirDados() override;
 
@@ -28,7 +30,7 @@ public:
     vector<Transacao *> getExtrato();
 
     string getTipoDeConta();
-    void setTipoDeConta(string tipo);
+    void setTipoDeConta(const string &tipo);
 
     double getRemuneracao();
     void setRemuneracao(double novaRemuneracao);
@@ -39,26 +41,24 @@ public:
     double getRendimento();
     void setRendimento(double r);
 
-    string getHeader() override {
+    string getHeader() override
+    {
         return "nome,trabalho,login,senha,conta,remuneracao,saldo,taxa_rendimento";
     }
 
     // realiza sobrecarga do operador <<
-    friend ostream& operator<<(ostream& out, const Cliente& c);
+    friend ostream &operator<<(ostream &out, const Cliente &c);
 
-
-    //cartão de crédito
+    // cartão de crédito
     bool possuiCartao() const; // get de possui cartão
-    CartaoCredito& getCartao();
+    CartaoCredito &getCartao();
     void criarCartao();
 };
 
-
-bool clienteVinculadoAoGerente(Gerente& gerente, Cliente* cliente);
+bool clienteVinculadoAoGerente(Gerente &gerente, Cliente *cliente);
 Cliente cadastrarCliente();
-void mostrarDadosCliente(vector<Cliente>& clientes);
+void mostrarDadosCliente(vector<Cliente> &clientes);
 double getRemuneracao();
-void listarCliente(vector <Cliente>& clientes);
-
+void listarCliente(vector<Cliente> &clientes);
 
 #endif

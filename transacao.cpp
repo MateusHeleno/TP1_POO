@@ -8,7 +8,7 @@
 #include <vector>
 #include <string>
 
-Transacao::Transacao(string t, double v, string d, string h)
+Transacao::Transacao(const string& t, double v, const string& d, const string& h)
     : valor(v),
       tipo(t),
       data(d),
@@ -41,7 +41,7 @@ string Transacao::getData()
     return data;
 }
 
-void Transacao::setData(string d)
+void Transacao::setData(const string &d)
 {
     data = d;
 }
@@ -51,7 +51,7 @@ string Transacao::getHorario()
     return horario;
 }
 
-void Transacao::setHorario(string h)
+void Transacao::setHorario(const string& h)
 {
     horario = h;
 }
