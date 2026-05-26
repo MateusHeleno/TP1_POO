@@ -33,5 +33,4 @@ Gerente cadastrarGerente();
 void vincularCliente(vector <Cliente>& clientes, vector<Gerente>& gerentes);
 void listarGerentes(vector <Gerente>& gerente);
 
-
 #endif

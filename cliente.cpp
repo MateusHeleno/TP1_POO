@@ -204,3 +204,17 @@ bool Cliente::possuiCartao() const {
 CartaoCredito& Cliente::getCartao() {
     return cartao;
 }
+
+void listarCliente(vector <Cliente>& clientes) {
+    limparBuffer();
+    cout << "=== LISTA DE CLIENTES CADASTRADOS ===" << endl;
+    if (clientes.empty())
+        cout << "Nenhum cliente cadastrado no sistema." << endl;
+
+    else {
+        for (Cliente &c : clientes) {
+            c.exibirDados();
+            cout << "-----------------------------------" << endl;
+        }
+    }
+}

@@ -45,8 +45,8 @@ public:
 
     // realiza sobrecarga do operador <<
     friend ostream& operator<<(ostream& out, const Cliente& c);
-    
-    
+
+
     //cartão de crédito
     bool possuiCartao() const; // get de possui cartão
     CartaoCredito& getCartao();

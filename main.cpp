@@ -12,8 +12,7 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
@@ -40,83 +39,78 @@ int main()
 
         limparTerminal();
         switch (valor) {
-        // Cadastrar cliente
-        case 1: {
-            Cliente novoCliente = cadastrarCliente();
-            novoCliente.exibirDados();
-            clientes.push_back(novoCliente);
+            // Cadastrar cliente
+            case 1: {
+                Cliente novoCliente = cadastrarCliente();
+                novoCliente.exibirDados();
+                clientes.push_back(novoCliente);
 
-            break;
-        }
-        // Cadastrar gerente
-        case 2: {
-            Gerente novoGerente = cadastrarGerente();
-            novoGerente.exibirDados();
-            gerentes.push_back(novoGerente);
+                break;
+            }
+            // Cadastrar gerente
+            case 2: {
+                Gerente novoGerente = cadastrarGerente();
+                novoGerente.exibirDados();
+                gerentes.push_back(novoGerente);
 
-            break;
-        }
-        // Criar transação
-        case 3:{
-            Transacao *t = criarTransacao(clientes);
-            if (t != nullptr) {
-                transacoes.push_back(*t);
+                break;
+            }
+            // Criar transação
+            case 3:{
+                Transacao *t = criarTransacao(clientes);
+                if (t != nullptr) {
+                    transacoes.push_back(*t);
 
-                Transacao *tNoVetor = &transacoes.back();
-                for (Cliente *c : t->getClientes())
-                    c->setTransacao(tNoVetor);
-                t->exibirTransacao();
+                    Transacao *tNoVetor = &transacoes.back();
+                    for (Cliente *c : t->getClientes())
+                        c->setTransacao(tNoVetor);
+                    t->exibirTransacao();
 
-                delete t;
+                    delete t;
+                }
+
+                break;
+            }
+            // Exibir extrato de um cliente
+            case 4: {
+                mostrarDadosCliente(clientes);
+
+                break;
             }
 
-            break;
-        }
-        // Exibir extrato de um cliente
-        case 4: {
-            mostrarDadosCliente(clientes);
+            // Associar cliente a gerente
+            case 5: {
+                vincularCliente(clientes, gerentes);
 
-            break;
-        }
+                break;
+            }
+            case 6: {
+                listarCliente(clientes);
+                break;
+            }
 
-        // Associar cliente a gerente
-        case 5: {
-            vincularCliente(clientes, gerentes);
+            case 7: {
+                listarGerentes(gerentes);
+                break;
+            }
 
-            break;
-        }
-        case 6:
-        {
-            listarCliente(clientes);
-            break;
-        }
+            case 8: {
+                cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
+                escreverCSV("clientes.csv", clientes);
+                escreverCSV("gerentes.csv", gerentes);
 
-        case 7:
-        {
-            listarGerentes(gerentes);
-            break;
-        }
+                break;
+            }
 
-        case 8:
-        {
-            cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
-            escreverCSV("clientes.csv", clientes);
-            escreverCSV("gerentes.csv", gerentes);
-
-            break;
+            case 9: {
+                cartaoMain(clientes, gerentes);
+            }
+            default: {
+                break;
+            }
         }
 
-        case 9: {
-            cartaoMain(clientes, gerentes);
-        }
-        default:
-        {
-            break;
-        }
-        }
-
-        if (valor != 8)
-        {
+        if (valor != 8) {
             cout << endl
                  << "Pressione Enter para voltar ao menu!" << endl;
             limparBuffer();
