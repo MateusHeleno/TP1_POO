@@ -6,8 +6,9 @@
 #include <string>
 #include <vector>
 
-Gerente::Gerente(const string &n, const string &t, const string &l, const string &s)
-    : Pessoa(n, t, l, s)
+Gerente::Gerente(const string &n, const string &t, const string &l, const string &s) 
+: Pessoa(n, "Gerente", l, s)
+
 {
     // o gerente foi construido na chamada
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include <unistd.h>
 #include "credito.hpp"
 #include "pessoa.hpp"
 #include "cliente.hpp"
@@ -14,31 +15,39 @@ using namespace std;
 
 int main()
 {
+    int k = 0;
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
     clientes.reserve(100);
     gerentes.reserve(100);
+
     vector<Transacao *> transacoes;
 
+    carregarClientes(clientes);
+    carregarGerentes(gerentes);
     do
     {
+        // if (k != 0)
+        //     sleep(1); // linux
+
         limparTerminal();
 
         cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO MASTER ====== " << endl;
         cout << "===== By Vorcaro =====" << endl;
-        cout << "1.Cadastrar Cliente" << endl
-             << "2.Cadastrar Gerente" << endl
-             << "3.Criar transacao" << endl
-             << "4.Exibir extrato de um Cliente" << endl
-             << "5.Associar gerente a cliente" << endl
-             << "6.Listar clientes" << endl
-             << "7.Listar gerentes" << endl
-             << "8.Salvar dados e sair" << endl
-             << "9.Cartão de crédito" << endl;
+        cout << "1. Cadastrar Cliente" << endl
+             << "2. Cadastrar Gerente" << endl
+             << "3. Criar transacao" << endl
+             << "4. Exibir extrato de um Cliente" << endl
+             << "5. Associar gerente a cliente" << endl
+             << "6. Listar clientes" << endl
+             << "7. Listar gerentes" << endl
+             << "8. Cartão de crédito" << endl
+             << "9. Salvar dados e sair" << endl;
         cout << "======================================================" << endl;
         valor = lerValor(9);
 
+        k++;
         limparTerminal();
         switch (valor)
         {
@@ -104,16 +113,16 @@ int main()
 
         case 8:
         {
-            cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
-            escreverCSV("clientes.csv", clientes);
-            escreverCSV("gerentes.csv", gerentes);
-
+            cartaoMain(clientes, gerentes);
             break;
         }
 
         case 9:
         {
-            cartaoMain(clientes, gerentes);
+            cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
+            escreverCSV("clientes.csv", clientes);
+            escreverCSV("gerentes.csv", gerentes);
+            break;
         }
         default:
         {
@@ -121,15 +130,17 @@ int main()
         }
         }
 
-        if (valor != 8)
+        if (valor != 9)
         {
             cout << endl
                  << "Pressione Enter para voltar ao menu!" << endl;
             limparBuffer();
-        }
-    } while (valor != 8);
 
-    for (Transacao *t : transacoes)
+            cin.get();
+        }
+    } while (valor != 9);
+
+    for (Transacao *t : transacoes) // exclui transacoes alocadas dinamicamente
     {
         delete t;
     }

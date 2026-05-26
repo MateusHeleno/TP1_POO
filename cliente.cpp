@@ -138,28 +138,49 @@ Cliente cadastrarCliente()
     cout << "Senha: ";
     getline(cin, senha);
 
-    cout << "Tipo de conta: ";
+    cout << "Tipo de conta (Poupança ou Corrente): ";
     cin >> tipoDeConta;
     while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente")
     {
-        cout << "Tipos disponíveis: Poupança ou Corrente" << endl;
+        cout << "Erro, escolha entre os tipos disponíveis: Poupança ou Corrente" << endl
+             << endl;
         cout << "Tipo de Conta: ";
         cin >> tipoDeConta;
     }
 
     cout << "Remuneração: ";
-    cin >> remuneracao;
+    while (!(cin >> remuneracao))
+    {
+        cout << "Erro: Digite um valor numérico válido (use ponto para decimais)." << endl
+             << endl;
+
+        cin.clear();             // Limpa a flag de erro do cin
+        limparBuffer();
+        
+        cout << "Remuneração: ";
+    }
 
     taxaRendimento = 0.0;
     if (toLowerString(tipoDeConta) == "poupança")
     {
         taxaRendimento = remuneracao * 0.05;
-        cout << "Valor do Rendimento: " << taxaRendimento << endl;
+        cout << "Valor do seu Rendimento: " << taxaRendimento << endl;
     }
 
     cout << "Saldo: ";
-    cin >> saldo;
+    while (!(cin >> saldo))
+    {
+        cout << "Erro: Digite um valor numérico válido (use ponto para decimais)." << endl
+             << endl;
+
+        cin.clear();             // Limpa a flag de erro do cin
+        limparBuffer();
+
+        cout << "Saldo: ";
+    }
     cout << endl;
+
+    cout << "Cliente cadastrado !!" << endl;
 
     return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo, false);
 }
