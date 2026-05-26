@@ -3,7 +3,7 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
-
+#include "credito.hpp"
 #include "pessoa.hpp"
 #include "cliente.hpp"
 #include "gerente.hpp"
@@ -32,9 +32,10 @@ int main() {
              << "5.Associar gerente a cliente" << endl
              << "6.Listar clientes" << endl
              << "7.Listar gerentes" << endl
-             << "8.Salvar dados e sair" << endl;
+             << "8.Salvar dados e sair" << endl
+             << "9. Cartão de crédito"<< endl;
         cout << "======================================================" << endl;
-        valor = lerValor();
+        valor = lerValor(9);
 
         limparTerminal();
         switch (valor) {
@@ -76,6 +77,7 @@ int main() {
 
                 break;
             }
+
             // Associar cliente a gerente
             case 5: {
                 vincularCliente(clientes, gerentes);
@@ -84,13 +86,11 @@ int main() {
             }
             case 6: {
                 listarCliente(clientes);
-
                 break;
             }
 
             case 7: {
                 listarGerentes(gerentes);
-
                 break;
             }
 
@@ -102,6 +102,9 @@ int main() {
                 break;
             }
 
+            case 9: {
+                cartaoMain(clientes, gerentes);
+            }
             default: {
                 break;
             }

@@ -1,6 +1,7 @@
 #ifndef CLIENTE_HPP
 #define CLIENTE_HPP
 
+#include "credito.hpp"
 #include "pessoa.hpp"
 #include "transacao.hpp" // Necessário para o vector de transações
 #include <vector>
@@ -15,9 +16,11 @@ private:
     double saldo;
     string tipoDeConta;
     vector<Transacao *> transacoes; // Coleção exigida pelo diagrama eh o extrato
+    CartaoCredito cartao;
+    bool temCartao;
 
 public:
-    Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal);
+    Cliente(string n, string t, string l, string s, double rem, string tipo, double taxa, double sal, bool temCartao);
 
     void exibirDados() override;
 
@@ -26,6 +29,9 @@ public:
 
     string getTipoDeConta();
     void setTipoDeConta(string tipo);
+
+    double getRemuneracao();
+    void setRemuneracao(double novaRemuneracao);
 
     double getSaldo();
     void setSaldo(double s);
@@ -39,10 +45,20 @@ public:
 
     // realiza sobrecarga do operador <<
     friend ostream& operator<<(ostream& out, const Cliente& c);
+
+
+    //cartão de crédito
+    bool possuiCartao() const; // get de possui cartão
+    CartaoCredito& getCartao();
+    void criarCartao();
 };
 
+
+bool clienteVinculadoAoGerente(Gerente& gerente, Cliente* cliente);
 Cliente cadastrarCliente();
 void mostrarDadosCliente(vector<Cliente>& clientes);
+double getRemuneracao();
 void listarCliente(vector <Cliente>& clientes);
+
 
 #endif
