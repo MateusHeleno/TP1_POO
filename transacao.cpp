@@ -89,37 +89,70 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
     double valor;
     string tipo, data, horario;
 
-    cout << "Tipo da Transação: ";
+    cout << "Tipo da Transação (Transferencia, Depósito, Saque): ";
     cin >> tipo;
+    string tipoLower = toLowerString(tipo);
+
+    // Fica em loop enquanto a palavra digitada NÃO for nenhuma das três permitidas
+    while (tipoLower != "transferencia" && tipoLower != "deposito" && tipoLower != "saque")
+    {
+        cout << "Erro: Transação inválida. Escolha entre Transferencia, Deposito ou Saque." << endl << endl;
+        
+        cout << "Tipo da Transação (Transferencia, Depósito, Saque): ";
+        cin >> tipo;
+        tipoLower = toLowerString(tipo); // Atualiza a variável para testar de novo no while
+    }
+
     cout << "Valor: ";
-    cin >> valor;
-    cout << "Data: ";
+    while (!(cin >> valor) || valor <= 0)
+    {
+        cout << "Erro: O valor da transação deve ser numérico e maior que zero." << endl << endl;
+
+        cin.clear();             // Limpa a flag de erro do cin
+        limparBuffer();          // Descarta o lixo do buffer
+
+        cout << "Valor: ";
+    }
+
+    cout << "Data (DD/MM/AAAA): ";
     cin >> data;
-    cout << "Horário: ";
+    // Verifica se a string tem exatamente 10 caracteres e se as barras estão nas posições corretas
+    while (data.length() != 10 || data[2] != '/' || data[5] != '/')
+    {
+        cout << "Erro: Formato de data inválido. Use exatamente o padrão DD/MM/AAAA." << endl << endl;
+        
+        cout << "Data (DD/MM/AAAA): ";
+        cin >> data;
+    }
+
+    cout << "Horário (HH:MM): ";
     cin >> horario;
+    // Verifica se a string tem exatamente 5 caracteres e se os dois-pontos estão na posição correta
+    while (horario.length() != 5 || horario[2] != ':')
+    {
+        cout << "Erro: Formato de horário inválido. Use exatamente o padrão HH:MM." << endl << endl;
+        
+        cout << "Horário (HH:MM): ";
+        cin >> horario;
+    }
 
     Transacao t(tipo, valor, data, horario);
 
-    if (toLowerString(tipo) == "transferencia") {
+    if (tipoLower == "transferencia") {
         if (!processarTransferencia(t, clientes, valor))
             return nullptr;
     }
 
-    else if (toLowerString(tipo) == "saque") {
+    else if (tipoLower == "saque") {
         if (!processarSaque(t, clientes, valor))
             return nullptr;
     }
 
-    else if (toLowerString(tipo) == "deposito") {
+    else if (tipoLower == "deposito") {
         if (!processarDeposito(t, clientes, valor))
             return nullptr;
     }
-
-    else {
-        cout << "Tipo de transação inválido. Os tipos disponíveis são: Transferência, Saque e Depósito" << endl;
-        return nullptr;
-    }
-
+    
     return new Transacao(t);
 }
 

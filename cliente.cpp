@@ -9,13 +9,15 @@
 
 Cliente::Cliente(const string &n, const string &t, const string &l, const string &s,
                  double rem, const string &tipo, double taxa, double sal, bool temCartao) : Pessoa(n, t, l, s),
-                                                                                            remuneracao(rem),
                                                                                             taxaDeRendimento(taxa),
                                                                                             saldo(sal),
                                                                                             tipoDeConta(tipo),
                                                                                             temCartao(temCartao)
 {
-    if (temCartao == true)
+    
+    setRemuneracao(rem);
+    
+    if (temCartao)
     {
         cartao.criar(remuneracao);
     }
@@ -23,6 +25,7 @@ Cliente::Cliente(const string &n, const string &t, const string &l, const string
 
 void Cliente::exibirDados()
 {
+    cout << "\n\t\tDados do CLiente\n";
     Pessoa::exibirDados(); // adiciona a implementacao da classe mae
 
     // adiciona os dados especificos
@@ -49,8 +52,13 @@ string Cliente::getTipoDeConta()
 void Cliente::setTipoDeConta(const string &tipo)
 {
     tipoDeConta = tipo;
-    if (toLowerString(tipoDeConta) == "corrente")
+    string tipoLower = toLowerString(tipoDeConta);
+    
+    if (tipoLower == "corrente") {
         taxaDeRendimento = 0.0;
+    } else if (tipoLower == "poupança") {
+        taxaDeRendimento = remuneracao * 0.05;
+    }
 }
 
 double Cliente::getSaldo()
@@ -149,10 +157,9 @@ Cliente cadastrarCliente()
     }
 
     cout << "Remuneração: ";
-    while (!(cin >> remuneracao))
+    while (!(cin >> remuneracao) || remuneracao < 0)
     {
-        cout << "Erro: Digite um valor numérico válido (use ponto para decimais)." << endl
-             << endl;
+        cout << "Erro: Digite um valor numérico válido e não negativo." << endl << endl;
 
         cin.clear();             // Limpa a flag de erro do cin
         limparBuffer();
@@ -163,15 +170,15 @@ Cliente cadastrarCliente()
     taxaRendimento = 0.0;
     if (toLowerString(tipoDeConta) == "poupança")
     {
-        taxaRendimento = remuneracao * 0.05;
+        taxaRendimento = remuneracao * 0.05;    
         cout << "Valor do seu Rendimento: " << taxaRendimento << endl;
     }
 
     cout << "Saldo: ";
-    while (!(cin >> saldo))
+    while (!(cin >> saldo) || saldo < 0)
     {
-        cout << "Erro: Digite um valor numérico válido (use ponto para decimais)." << endl
-             << endl;
+        cout << "Erro: Digite um valor numérico válido e não negativo." << endl << endl;
+ 
 
         cin.clear();             // Limpa a flag de erro do cin
         limparBuffer();

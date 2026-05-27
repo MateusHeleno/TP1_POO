@@ -25,6 +25,7 @@ void Gerente::setCliente(Cliente *c)
 
 void Gerente::exibirDados()
 {
+    cout << "\n\t\tDados do CLiente\n";
     Pessoa::exibirDados();
 
     std::cout << "Quantidade de clientes vinculados: " << clientes.size() << endl;

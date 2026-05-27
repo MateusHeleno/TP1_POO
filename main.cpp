@@ -88,7 +88,6 @@ int main()
         case 4:
         {
             mostrarDadosCliente(clientes);
-
             break;
         }
 
@@ -129,6 +128,7 @@ int main()
             break;
         }
         }
+        limparBuffer();
 
         if (valor != 9)
         {
