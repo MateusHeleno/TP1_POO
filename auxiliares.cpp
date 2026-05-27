@@ -112,7 +112,7 @@ void carregarGerentes(vector<Gerente> &gerentes)
         getline(ss, login, ',');
         getline(ss, senha, ',');
 
-        gerentes.push_back(Gerente(nome, trabalho, login, senha));
+        gerentes.push_back(Gerente(nome, login, senha));
     }
     file.close();
 }

@@ -15,7 +15,7 @@ private:
     vector<Cliente *> clientes; // clientes vinculados
 
 public:
-    Gerente(const string& n, const string& t, const string& l, const string& s);
+    Gerente(const string& n, const string& l, const string& s);
 
     void exibirDados() override;
 

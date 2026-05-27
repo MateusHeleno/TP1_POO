@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-Gerente::Gerente(const string &n, const string &t, const string &l, const string &s) 
+Gerente::Gerente(const string &n, const string &l, const string &s) 
 : Pessoa(n, "Gerente", l, s)
 
 {
@@ -28,10 +28,17 @@ void Gerente::exibirDados()
     Pessoa::exibirDados();
 
     std::cout << "Quantidade de clientes vinculados: " << clientes.size() << endl;
-    std::cout << "Clientes vinculados: " << endl;
-    for (const auto &cliente : clientes)
+    std::cout << "Clientes vinculados: ";
+
+    if(clientes.size() == 0)
+        std::cout << "Não há clientes vinculados" << endl;
+    else
     {
-        cliente->exibirDados();
+        for (const auto &cliente : clientes)
+        {
+            std::cout <<endl;
+            cliente->exibirDados();
+        }
     }
 }
 
@@ -48,18 +55,16 @@ ostream &operator<<(ostream &out, const Gerente &g)
 
 Gerente cadastrarGerente()
 {
-    string nome, trabalho, login, senha;
+    string nome, login, senha;
 
     cout << "Nome: ";
     cin >> nome;
-    cout << "Trabalho: ";
-    cin >> trabalho;
     cout << "Login: ";
     cin >> login;
     cout << "Senha: ";
     cin >> senha;
 
-    return Gerente(nome, trabalho, login, senha);
+    return Gerente(nome, login, senha);
 }
 
 void vincularCliente(vector<Cliente> &clientes, vector<Gerente> &gerentes)
