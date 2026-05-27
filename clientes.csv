@@ -1,8 +1,5 @@
 nome,trabalho,login,senha,conta,remuneracao,saldo,taxa_rendimento
-a,a,a,a,Poupança,15,1500,0.75
-a,a,a,a,Poupança,2,2,0.1
-a,a,a,a,Corrente,4,4,0
-matus,6,4,4,corrente,5,5,0
-a,a,a,a,Corrente,645,64,0
-am,a,a,a,Corrente,5,-100,0
-a,a,a,a,corrente,5,5,0
+Joao,Casa Noturna,BigJf,Joao123,Corrente,6767,2000,0
+Mateus,Cientista da Computação,Matelan378,Mateus378!,Poupança,42424,10000,2121.2
+Pedro Lucca,Fisiculturista,PedroBOMBADO,Testo123,Corrente,7676,2424,0
+Pedro Cabeludoo,Barbeiro,Barba,BARBa,Poupança,2467,6724,123.35

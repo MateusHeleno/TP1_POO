@@ -34,7 +34,6 @@ int main()
         limparTerminal();
 
         cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO MASTER ====== " << endl;
-        cout << "===== By Vorcaro =====" << endl;
         cout << "1. Cadastrar Cliente" << endl
              << "2. Cadastrar Gerente" << endl
              << "3. Criar transacao" << endl
@@ -128,13 +127,11 @@ int main()
             break;
         }
         }
-        limparBuffer();
 
         if (valor != 9)
         {
             cout << endl
                  << "Pressione Enter para voltar ao menu!" << endl;
-            limparBuffer();
 
             cin.get();
         }

@@ -12,14 +12,16 @@ CartaoCredito::CartaoCredito():
 
 void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes){
     limparTerminal();
-    cout << "Digite o que deseja: "<< endl
-    << "1. Criar cartão" << endl
-    << "2. Bloquear cartão" << endl
-    << "3. Alterar limite de crédito" << endl 
-    << "4. Pagamento parcelado" << endl
-    << "5. Acessar fatura"<< endl
-    << "6. Desbloquear cartão" << endl; // aqui dentro ele irá realizar o pagamento ou não
-    int valor = lerValor(5);
+    cout << "====== SISTEMA DE GERENCIAMENTO DE DO CLIENTE ====== " << endl
+         << "1. Criar cartão" << endl
+         << "2. Bloquear cartão" << endl
+         << "3. Alterar limite de crédito" << endl
+         << "4. Pagamento parcelado" << endl
+         << "5. Acessar fatura" << endl
+         << "6. Desbloquear cartão" << endl // aqui dentro ele irá realizar o pagamento ou não
+         << "7. Voltar ao sistema de gerenciamento do Banco" << endl;
+    cout << "======================================================" << endl;
+    int valor = lerValor(7);
     switch (valor){
 
         case 1: {
@@ -67,9 +69,17 @@ void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes){
         }
 
         default:
+        {
             break;
-    
-    
+        }
+
+        if (valor != 7)
+        {
+            cout << endl
+                    << "Pressione Enter para voltar ao menu!" << endl;
+
+            cin.get();
+        }
     }
 
 }

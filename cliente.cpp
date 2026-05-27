@@ -216,6 +216,7 @@ void mostrarDadosCliente(vector<Cliente> &clientes)
     cout << "Insira o nome do cliente: ";
     getline(cin, nome);
 
+    cout << "Cliente ";
     Cliente *cliente = buscaPessoa(clientes, nome);
     if (cliente == nullptr)
         return;

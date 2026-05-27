@@ -38,7 +38,7 @@ T* buscaPessoa(vector <T>& pessoas, const string& nome) {
     if (pessoa.getNome() == nome)
     return &pessoa;
     
-    cout << "Pessoa " << nome << " não encontrada" << endl;
+    cout << nome << " não se encontra no nosso Banco de Dados" << endl;
     return nullptr;
 }
 
