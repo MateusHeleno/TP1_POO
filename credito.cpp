@@ -1,5 +1,6 @@
 #include "credito.hpp"
 #include <iostream>
+#include <unistd.h>
 #include"auxiliares.hpp"
 
 CartaoCredito::CartaoCredito(): 
@@ -11,76 +12,77 @@ CartaoCredito::CartaoCredito():
 {};
 
 void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes){
-    limparTerminal();
-    cout << "====== SISTEMA DE GERENCIAMENTO DE DO CLIENTE ====== " << endl
-         << "1. Criar cartão" << endl
-         << "2. Bloquear cartão" << endl
-         << "3. Alterar limite de crédito" << endl
-         << "4. Pagamento parcelado" << endl
-         << "5. Acessar fatura" << endl
-         << "6. Desbloquear cartão" << endl // aqui dentro ele irá realizar o pagamento ou não
-         << "7. Voltar ao sistema de gerenciamento do Banco" << endl;
-    cout << "======================================================" << endl;
-    int valor = lerValor(7);
-    switch (valor){
+    int valor;
 
-        case 1: {
+    do
+    {
+        limparTerminal();
 
-            criarCartaoParaCliente(clientes, gerentes);
-            break;
-
+        cout << "====== SISTEMA DE GERENCIAMENTO DE CRÉDITO DO CLIENTE ====== " << endl
+             << "1. Criar cartão" << endl
+             << "2. Bloquear cartão" << endl
+             << "3. Alterar limite de crédito" << endl
+             << "4. Pagamento parcelado" << endl
+             << "5. Acessar fatura" << endl
+             << "6. Desbloquear cartão" << endl // aqui dentro ele irá realizar o pagamento ou não
+             << "7. Voltar ao sistema de gerenciamento do Banco" << endl;
+        cout << "======================================================" << endl;
+        valor = lerValor(7);
+        switch (valor){
+    
+            case 1: {
+    
+                criarCartaoParaCliente(clientes, gerentes);
+                break;
+    
+            }
+    
+            case 2: {
+    
+                bloquearCartao(clientes, gerentes);
+                break;
+    
+            }
+    
+    
+    
+            case 3: {
+    
+    
+                alterarLimiteCartao(clientes, gerentes);
+                break;
+    
+            }
+    
+            case 4: {
+    
+                realizarCompraParcelada(clientes);
+                break;
+            }
+            
+    
+            case 5: {
+    
+                acessarFatura(clientes);
+                break;
+    
+            }
+            case 6: {
+    
+                desbloquearCartao(clientes, gerentes);
+                break;
+    
+            }
+    
+            case 7:{
+                cout <<"Voltando ao sistema de Gerenciamento do Banco..."<< endl ;
+                sleep(1);
+                break;
+            }
+    
         }
-
-        case 2: {
-
-            bloquearCartao(clientes, gerentes);
-            break;
-
-        }
-
-
-
-        case 3: {
-
-
-            alterarLimiteCartao(clientes, gerentes);
-            break;
-
-        }
-
-        case 4: {
-
-            realizarCompraParcelada(clientes);
-            break;
-        }
-        
-
-        case 5: {
-
-            acessarFatura(clientes);
-            break;
-
-        }
-        case 6: {
-
-            desbloquearCartao(clientes, gerentes);
-            break;
-
-        }
-
-        default:
-        {
-            break;
-        }
-
-        if (valor != 7)
-        {
-            cout << endl
-                    << "Pressione Enter para voltar ao menu!" << endl;
-
-            cin.get();
-        }
-    }
+    } while (valor != 7);
+    
 
 }
 
@@ -465,7 +467,7 @@ void acessarFatura(vector<Cliente>& clientes) {
     limparBuffer();
     limparTerminal();
 
-    cout << "===== ACESSAR FATURA =====" << endl;
+    cout << endl << "===== ACESSAR FATURA =====" << endl;
 
     cout << "Nome do cliente: ";
     getline(cin, nomeCliente);
@@ -517,7 +519,14 @@ void acessarFatura(vector<Cliente>& clientes) {
 
         default:
             break;
+
+        cout << endl
+                << "Pressione Enter para voltar ao menu!" << endl;
+
+        cin.get();
     }
+
+
 }
 
 /*

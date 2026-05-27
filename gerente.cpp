@@ -25,7 +25,7 @@ void Gerente::setCliente(Cliente *c)
 
 void Gerente::exibirDados()
 {
-    cout << "\n\t\tDados do CLiente\n";
+    cout << endl << "\t\tDados do Gerente" << endl;
     Pessoa::exibirDados();
 
     std::cout << "Quantidade de clientes vinculados: " << clientes.size() << endl;
@@ -58,12 +58,13 @@ Gerente cadastrarGerente()
 {
     string nome, login, senha;
 
+    limparBuffer();
     cout << "Nome: ";
-    cin >> nome;
+    getline(cin,nome);
     cout << "Login: ";
-    cin >> login;
+    getline(cin, login);
     cout << "Senha: ";
-    cin >> senha;
+    getline(cin, senha);
 
     return Gerente(nome, login, senha);
 }

@@ -25,7 +25,8 @@ Cliente::Cliente(const string &n, const string &t, const string &l, const string
 
 void Cliente::exibirDados()
 {
-    cout << "\n\t\tDados do CLiente\n";
+    cout << endl << "\t\tDados do Gerente" << endl;
+    
     Pessoa::exibirDados(); // adiciona a implementacao da classe mae
 
     // adiciona os dados especificos
@@ -216,7 +217,7 @@ void mostrarDadosCliente(vector<Cliente> &clientes)
     cout << "Insira o nome do cliente: ";
     getline(cin, nome);
 
-    cout << "Cliente ";
+
     Cliente *cliente = buscaPessoa(clientes, nome);
     if (cliente == nullptr)
         return;

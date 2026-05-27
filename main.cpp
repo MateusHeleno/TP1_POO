@@ -33,7 +33,7 @@ int main()
 
         limparTerminal();
 
-        cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO MASTER ====== " << endl;
+        cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO ====== " << endl;
         cout << "1. Cadastrar Cliente" << endl
              << "2. Cadastrar Gerente" << endl
              << "3. Criar transacao" << endl
@@ -117,7 +117,8 @@ int main()
 
         case 9:
         {
-            cout << "Salvando registros nos arquivos. Por favor aguarde!" << endl;
+            cout << "Salvando registros nos arquivos. Por favor aguarde..." << endl;
+            sleep(1);
             escreverCSV("clientes.csv", clientes);
             escreverCSV("gerentes.csv", gerentes);
             break;
