@@ -25,7 +25,7 @@ Cliente::Cliente(const string &n, const string &t, const string &l, const string
 
 void Cliente::exibirDados()
 {
-    cout << endl << "\t\tDados do Gerente" << endl;
+    cout << endl << "\t\tDados do Cliente" << endl;
     
     Pessoa::exibirDados(); // adiciona a implementacao da classe mae
 

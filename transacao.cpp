@@ -89,7 +89,7 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
     double valor;
     string tipo, data, horario;
 
-    cout << "Tipo da Transação (Transferencia, Depósito, Saque): ";
+    cout << "Tipo da Transação (Transferencia, Deposito, Saque): ";
     cin >> tipo;
     string tipoLower = toLowerString(tipo);
 
@@ -114,7 +114,7 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
         cout << "Valor: ";
     }
 
-    cout << "Data (DD/MM/AAAA): ";
+    /*cout << "Data (DD/MM/AAAA): ";
     cin >> data;
     // Verifica se a string tem exatamente 10 caracteres e se as barras estão nas posições corretas
     while (data.length() != 10 || data[2] != '/' || data[5] != '/')
@@ -134,7 +134,7 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
         
         cout << "Horário (HH:MM): ";
         cin >> horario;
-    }
+    }*/
 
     Transacao t(tipo, valor, data, horario);
 
@@ -158,21 +158,19 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
 
 // se o tipo é transferência, precisamos do nome dos clientes que estão envolvidos na transação e verificar se eles estão no vetor de clientes
 bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valor) {
-    string pessoa1, pessoa2;
+    Cliente *c1 = nullptr;
+    Cliente *c2 = nullptr;
 
     limparBuffer();
-    cout << "Cliente 1 (Pagador): ";
-    getline(cin, pessoa1);
-    cout << "Cliente 2 (Destinatário): ";
-    getline(cin, pessoa2);
 
-    Cliente *c1 = buscaPessoa(clientes, pessoa1);
-    Cliente *c2 = buscaPessoa(clientes, pessoa2);
-    if (c1 == nullptr || c2 == nullptr)
-        return false;
+    solicitarCliente(clientes, c1, "Cliente 1 (Pagador): ");
+    solicitarCliente(clientes, c2, "Cliente 2 (Destinatário): ");
 
-    if (!verificaSaldo(*c1, valor))
-        return false;
+    while (!verificaSaldo(*c1, valor))
+    {
+        cout << "Digite um novo valor para o saldo " << endl;
+        cin >> valor;
+    }
 
     // c1->setTransacao(&t);
     // c2->setTransacao(&t);
@@ -185,18 +183,15 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
 }
 
 bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
-    string pessoa;
+    Cliente *c;
     limparBuffer();
-    cout << "Nome do dono da conta: ";
-    getline(cin, pessoa);
+    solicitarCliente(clientes, c, "Nome do dono da conta: ");
 
-    Cliente *c = buscaPessoa(clientes, pessoa);
-    if (c == nullptr)
-        return false;
-
-    if (!verificaSaldo(*c, valor))
-        return false;
-
+    while (!verificaSaldo(*c, valor))
+    {
+        cout << "Digite um novo valor para o saldo " << endl;
+        cin >> valor;
+    }
     // c->setTransacao(&t);
     c->setSaldo(c->getSaldo() - valor);
     t.setClientes(c);
@@ -204,15 +199,22 @@ bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
     return true;
 }
 
-bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor) {
+void solicitarCliente(vector<Cliente> &clientes, Cliente *&c, string mensagem)
+{
     string pessoa;
-    limparBuffer();
-    cout << "Nome do dono da conta: ";
-    getline(cin, pessoa);
+    do
+    {
+        cout << mensagem;
+        getline(cin, pessoa);
 
-    Cliente *c = buscaPessoa(clientes, pessoa);
-    if (c == nullptr)
-        return false;
+        c = buscaPessoa(clientes, pessoa);
+    } while (c == nullptr);
+}
+
+bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor) {
+    Cliente *c;
+    limparBuffer();
+    solicitarCliente(clientes, c,"Nome do dono da conta: ");
 
     // c->setTransacao(&t);
     c->setSaldo(c->getSaldo() + valor);
