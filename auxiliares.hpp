@@ -35,8 +35,8 @@ void escreverCSV(const string &arquivo, vector<T> vec) {
 template<typename T>
 T* buscaPessoa(vector <T>& pessoas, const string& nome) {
     for (auto& pessoa: pessoas)
-    if (pessoa.getNome() == nome)
-    return &pessoa;
+        if (pessoa.getNome() == nome)
+            return &pessoa;
 
     cout << nome << " não se encontra no nosso Banco de Dados" << endl;
     return nullptr;

@@ -26,7 +26,7 @@ int main() {
 
     carregarClientes(clientes);
     carregarGerentes(gerentes);
-    carregarTransacoes("transacoes.csv", transacoes, clientes);
+    carregarTransacoes("arquivos/transacoes.csv", transacoes, clientes);
 
     do {
         // if (k != 0)
@@ -110,9 +110,9 @@ int main() {
             case 9: {
                 cout << "Salvando registros nos arquivos. Por favor aguarde..." << endl;
                 sleep(1);
-                escreverCSV("clientes.csv", clientes);
-                escreverCSV("gerentes.csv", gerentes);
-                escreverTransacoes("transacoes.csv", transacoes);
+                escreverCSV("arquivos/clientes.csv", clientes);
+                escreverCSV("arquivos/gerentes.csv", gerentes);
+                escreverTransacoes("arquivos/transacoes.csv", transacoes);
 
                 break;
             }

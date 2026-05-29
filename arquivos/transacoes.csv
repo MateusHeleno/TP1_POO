@@ -1,0 +1,4 @@
+tipo,valor,data,horario,clientesEnvolvidos
+deposito,100,29/05/2026,13:30
+saque,100,29/05/2026,13:30
+Transferencia,200,29/05/2026,13:40

@@ -51,9 +51,8 @@ string toLowerString(string s)
     return s;
 }
 
-void carregarClientes(vector<Cliente> &clientes)
-{
-    ifstream file("clientes.csv");
+void carregarClientes(vector<Cliente> &clientes) {
+    ifstream file("arquivos/clientes.csv");
 
     if (!file.is_open()) // verifica se o arquivo existe
     {
@@ -91,7 +90,7 @@ void carregarClientes(vector<Cliente> &clientes)
 }
 
 void carregarGerentes(vector<Gerente> &gerentes) {
-    ifstream file("gerentes.csv");
+    ifstream file("arquivos/gerentes.csv");
 
     if (!file.is_open())
         return;
