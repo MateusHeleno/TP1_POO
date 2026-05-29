@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include"auxiliares.hpp"
 
-CartaoCredito::CartaoCredito(): 
+CartaoCredito::CartaoCredito():
       limiteTotal(0.0),
       limiteDisponivel(0.0),
       valorFatura(0.0),
@@ -14,8 +14,7 @@ CartaoCredito::CartaoCredito():
 void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes){
     int valor;
 
-    do
-    {
+    do {
         limparTerminal();
 
         cout << "====== SISTEMA DE GERENCIAMENTO DE CRÉDITO DO CLIENTE ====== " << endl
@@ -28,62 +27,48 @@ void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes){
              << "7. Voltar ao sistema de gerenciamento do Banco" << endl;
         cout << "======================================================" << endl;
         valor = lerValor(7);
+
         switch (valor){
-    
+
             case 1: {
-    
                 criarCartaoParaCliente(clientes, gerentes);
                 break;
-    
             }
-    
             case 2: {
-    
                 bloquearCartao(clientes, gerentes);
                 break;
-    
             }
-    
-    
-    
             case 3: {
-    
-    
                 alterarLimiteCartao(clientes, gerentes);
                 break;
-    
             }
-    
             case 4: {
-    
                 realizarCompraParcelada(clientes);
                 break;
             }
-            
-    
             case 5: {
-    
                 acessarFatura(clientes);
                 break;
-    
             }
             case 6: {
-    
                 desbloquearCartao(clientes, gerentes);
                 break;
-    
             }
-    
             case 7:{
                 cout <<"Voltando ao sistema de Gerenciamento do Banco..."<< endl ;
                 sleep(1);
                 break;
             }
-    
+            default:
+                break;
+        }
+        if (valor != 9) {
+            cout << endl
+                 << "Pressione Enter para voltar ao menu!" << endl;
+
+            cin.get();
         }
     } while (valor != 7);
-    
-
 }
 
 //Parte de criar cartão ---------------------------------------
@@ -183,7 +168,7 @@ void bloquearCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
         getline(cin, nomeCliente);
 
         Cliente* cliente = buscaPessoa(clientes, nomeCliente);
-        
+
         if (cliente == nullptr) {
             return;
         }
