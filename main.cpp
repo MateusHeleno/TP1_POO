@@ -108,15 +108,10 @@ int main() {
             }
 
             case 9: {
+                cout << "Salvando registros nos arquivos. Por favor aguarde..." << endl;
                 sleep(1);
                 escreverCSV("clientes.csv", clientes);
                 escreverCSV("gerentes.csv", gerentes);
-                for (Transacao* t : transacoes) {
-                    cout << "[DEBUG] " << t->getTipo() << " | clientes: ";
-                    for (Cliente* c : t->getClientes())
-                        cout << c->getNome() << " ";
-                    cout << endl;
-                }
                 escreverTransacoes("transacoes.csv", transacoes);
 
                 break;

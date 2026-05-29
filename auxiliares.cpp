@@ -138,7 +138,7 @@ void carregarTransacoes(const string& arquivo, vector<Transacao*>& transacoes, v
         if (linha.empty()) continue;
 
         stringstream ss(linha);
-        string tipo, valorStr, data, horario, loginCliente;
+        string tipo, valorStr, data, horario, nomeCliente;
 
         getline(ss, tipo,     ',');
         getline(ss, valorStr, ',');
@@ -147,15 +147,14 @@ void carregarTransacoes(const string& arquivo, vector<Transacao*>& transacoes, v
 
         Transacao* t = new Transacao(tipo, stod(valorStr), data, horario);
 
-        // Lê os logins dos clientes envolvidos (pode ser 1 ou 2)
-        while (getline(ss, loginCliente, ',')) {
-            if (loginCliente.empty()) continue;
+        while (getline(ss, nomeCliente, ',')) {
+            if (nomeCliente.empty()) continue;
 
-            // Busca o cliente pelo login no vetor
+            // Busca o cliente pelo nome no vetor
             for (Cliente& c : clientes) {
-                if (c.getLogin() == loginCliente) {
-                    t->setClientes(&c);  // reconecta o ponteiro
-                    c.setTransacao(t);   // reconecta no extrato do cliente
+                if (c.getNome() == nomeCliente) {
+                    t->setClientes(&c);
+                    c.setTransacao(t);
                     break;
                 }
             }

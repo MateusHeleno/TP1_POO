@@ -40,6 +40,7 @@ void Cliente::exibirDados()
     if (tipoLower == "poupança")
         cout << "Valor do rendimento mensal: " << taxaDeRendimento << endl;
 
+    cout << endl;
     cout << "Total de transações realizadas: " << transacoes.size() << endl;
     for (auto &t : transacoes)
         t->exibirTransacao();
