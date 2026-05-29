@@ -90,20 +90,16 @@ void carregarClientes(vector<Cliente> &clientes)
     file.close();
 }
 
-void carregarGerentes(vector<Gerente> &gerentes)
-{
+void carregarGerentes(vector<Gerente> &gerentes) {
     ifstream file("gerentes.csv");
 
     if (!file.is_open())
-    {
         return;
-    }
 
     string linha;
     getline(file, linha);
 
-    while (getline(file, linha))
-    {
+    while (getline(file, linha)) {
         stringstream ss(linha);
         string nome, trabalho, login, senha;
 
@@ -114,5 +110,59 @@ void carregarGerentes(vector<Gerente> &gerentes)
 
         gerentes.push_back(Gerente(nome, login, senha));
     }
+    file.close();
+}
+
+void escreverTransacoes(const string& arquivo, const vector<Transacao*>& transacoes) {
+    if (transacoes.empty())
+        return;
+
+    ofstream file(arquivo);
+    file << "tipo,valor,data,horario,clientesEnvolvidos\n";
+
+    for (Transacao* t : transacoes)
+        file << *t;
+
+    file.close();
+}
+
+void carregarTransacoes(const string& arquivo, vector<Transacao*>& transacoes, vector<Cliente>& clientes) {
+    ifstream file(arquivo);
+    if (!file.is_open())
+        return;
+
+    string linha;
+    getline(file, linha); // descarta o header
+
+    while (getline(file, linha)) {
+        if (linha.empty()) continue;
+
+        stringstream ss(linha);
+        string tipo, valorStr, data, horario, loginCliente;
+
+        getline(ss, tipo,     ',');
+        getline(ss, valorStr, ',');
+        getline(ss, data,     ',');
+        getline(ss, horario,  ',');
+
+        Transacao* t = new Transacao(tipo, stod(valorStr), data, horario);
+
+        // Lê os logins dos clientes envolvidos (pode ser 1 ou 2)
+        while (getline(ss, loginCliente, ',')) {
+            if (loginCliente.empty()) continue;
+
+            // Busca o cliente pelo login no vetor
+            for (Cliente& c : clientes) {
+                if (c.getLogin() == loginCliente) {
+                    t->setClientes(&c);  // reconecta o ponteiro
+                    c.setTransacao(t);   // reconecta no extrato do cliente
+                    break;
+                }
+            }
+        }
+
+        transacoes.push_back(t);
+    }
+
     file.close();
 }

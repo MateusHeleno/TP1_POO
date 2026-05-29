@@ -8,8 +8,7 @@ using namespace std;
 
 class Cliente; // tem que avisar que a classe existe pra nao ter que chamar o arquivo aq
 
-class Transacao
-{
+class Transacao {
 private:
     double valor;
     string tipo;
@@ -37,6 +36,10 @@ public:
 
     // Método para exibir as informações da transação
     void exibirTransacao();
+
+    string getHeader();
+
+    friend ostream &operator<<(ostream &out, const Transacao& t);
 };
 
 Transacao *criarTransacao(vector<Cliente> &clientes);

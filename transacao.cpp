@@ -66,8 +66,7 @@ vector<Cliente *> Transacao::getClientes()
     return clientesEnvolvidos; // ja eh a colecao de clientes envolvidos completa
 }
 
-void Transacao::exibirTransacao()
-{
+void Transacao::exibirTransacao() {
     cout << "Tipo: " << tipo << endl
          << "Valor: R$ " << valor << endl
          << "Data: " << data << endl
@@ -78,14 +77,81 @@ void Transacao::exibirTransacao()
     if (clientesEnvolvidos.empty()) // verifica se a lista esta vazia
         cout << "  Nenhum cliente registrado nesta transação." << endl;
     else
-        for (Cliente *cliente : clientesEnvolvidos)
-        {
+        for (Cliente *cliente : clientesEnvolvidos) {
             string nome = cliente->getNome();
             cout << "  - " << nome << endl; // o nome esta protegido na classe pessoa -> usamos getter
         }
 }
 
 Transacao *criarTransacao(vector<Cliente> &clientes) {
+    // double valor;
+    // string tipo, data, horario;
+
+    // cout << "Tipo da Transação (Transferencia, Deposito, Saque): ";
+    // cin >> tipo;
+    // string tipoLower = toLowerString(tipo);
+
+    // // Fica em loop enquanto a palavra digitada NÃO for nenhuma das três permitidas
+    // while (tipoLower != "transferencia" && tipoLower != "deposito" && tipoLower != "saque")
+    // {
+    //     cout << "Erro: Transação inválida. Escolha entre Transferencia, Deposito ou Saque." << endl << endl;
+
+    //     cout << "Tipo da Transação (Transferencia, Depósito, Saque): ";
+    //     cin >> tipo;
+    //     tipoLower = toLowerString(tipo); // Atualiza a variável para testar de novo no while
+    // }
+
+    // cout << "Valor: ";
+    // while (!(cin >> valor) || valor <= 0)
+    // {
+    //     cout << "Erro: O valor da transação deve ser numérico e maior que zero." << endl << endl;
+
+    //     cin.clear();             // Limpa a flag de erro do cin
+    //     limparBuffer();          // Descarta o lixo do buffer
+
+    //     cout << "Valor: ";
+    // }
+
+    // cout << "Data (DD/MM/AAAA): ";
+    // cin >> data;
+    // // Verifica se a string tem exatamente 10 caracteres e se as barras estão nas posições corretas
+    // while (data.length() != 10 || data[2] != '/' || data[5] != '/')
+    // {
+    //     cout << "Erro: Formato de data inválido. Use exatamente o padrão DD/MM/AAAA." << endl << endl;
+
+    //     cout << "Data (DD/MM/AAAA): ";
+    //     cin >> data;
+    // }
+
+    // cout << "Horário (HH:MM): ";
+    // cin >> horario;
+    // // Verifica se a string tem exatamente 5 caracteres e se os dois-pontos estão na posição correta
+    // while (horario.length() != 5 || horario[2] != ':')
+    // {
+    //     cout << "Erro: Formato de horário inválido. Use exatamente o padrão HH:MM." << endl << endl;
+
+    //     cout << "Horário (HH:MM): ";
+    //     cin >> horario;
+    // }
+
+    // Transacao t(tipo, valor, data, horario);
+
+    // if (tipoLower == "transferencia") {
+    //     if (!processarTransferencia(t, clientes, valor))
+    //         return nullptr;
+    // }
+
+    // else if (tipoLower == "saque") {
+    //     if (!processarSaque(t, clientes, valor))
+    //         return nullptr;
+    // }
+
+    // else if (tipoLower == "deposito") {
+    //     if (!processarDeposito(t, clientes, valor))
+    //         return nullptr;
+    // }
+
+    // return new Transacao(t);
     double valor;
     string tipo, data, horario;
 
@@ -93,67 +159,55 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
     cin >> tipo;
     string tipoLower = toLowerString(tipo);
 
-    // Fica em loop enquanto a palavra digitada NÃO for nenhuma das três permitidas
-    while (tipoLower != "transferencia" && tipoLower != "deposito" && tipoLower != "saque")
-    {
+    while (tipoLower != "transferencia" && tipoLower != "deposito" && tipoLower != "saque") {
         cout << "Erro: Transação inválida. Escolha entre Transferencia, Deposito ou Saque." << endl << endl;
-        
         cout << "Tipo da Transação (Transferencia, Depósito, Saque): ";
         cin >> tipo;
-        tipoLower = toLowerString(tipo); // Atualiza a variável para testar de novo no while
+        tipoLower = toLowerString(tipo);
     }
 
     cout << "Valor: ";
-    while (!(cin >> valor) || valor <= 0)
-    {
+    while (!(cin >> valor) || valor <= 0) {
         cout << "Erro: O valor da transação deve ser numérico e maior que zero." << endl << endl;
-
-        cin.clear();             // Limpa a flag de erro do cin
-        limparBuffer();          // Descarta o lixo do buffer
-
+        cin.clear();
+        limparBuffer();
         cout << "Valor: ";
     }
 
-    /*cout << "Data (DD/MM/AAAA): ";
+    cout << "Data (DD/MM/AAAA): ";
     cin >> data;
-    // Verifica se a string tem exatamente 10 caracteres e se as barras estão nas posições corretas
-    while (data.length() != 10 || data[2] != '/' || data[5] != '/')
-    {
+    while (data.length() != 10 || data[2] != '/' || data[5] != '/') {
         cout << "Erro: Formato de data inválido. Use exatamente o padrão DD/MM/AAAA." << endl << endl;
-        
         cout << "Data (DD/MM/AAAA): ";
         cin >> data;
     }
 
     cout << "Horário (HH:MM): ";
     cin >> horario;
-    // Verifica se a string tem exatamente 5 caracteres e se os dois-pontos estão na posição correta
-    while (horario.length() != 5 || horario[2] != ':')
-    {
+    while (horario.length() != 5 || horario[2] != ':') {
         cout << "Erro: Formato de horário inválido. Use exatamente o padrão HH:MM." << endl << endl;
-        
         cout << "Horário (HH:MM): ";
         cin >> horario;
-    }*/
-
-    Transacao t(tipo, valor, data, horario);
-
-    if (tipoLower == "transferencia") {
-        if (!processarTransferencia(t, clientes, valor))
-            return nullptr;
     }
 
-    else if (tipoLower == "saque") {
-        if (!processarSaque(t, clientes, valor))
-            return nullptr;
+    // ✅ aloca no heap direto — sem cópia depois
+    Transacao *t = new Transacao(tipo, valor, data, horario);
+
+    bool sucesso = false;
+
+    if (tipoLower == "transferencia")
+        sucesso = processarTransferencia(*t, clientes, valor);
+    else if (tipoLower == "saque")
+        sucesso = processarSaque(*t, clientes, valor);
+    else if (tipoLower == "deposito")
+        sucesso = processarDeposito(*t, clientes, valor);
+
+    if (!sucesso) {
+        delete t;
+        return nullptr;
     }
 
-    else if (tipoLower == "deposito") {
-        if (!processarDeposito(t, clientes, valor))
-            return nullptr;
-    }
-    
-    return new Transacao(t);
+    return t;
 }
 
 // se o tipo é transferência, precisamos do nome dos clientes que estão envolvidos na transação e verificar se eles estão no vetor de clientes
@@ -229,4 +283,18 @@ bool verificaSaldo(Cliente &c, double valor) {
         return false;
     }
     return true;
+}
+
+string Transacao::getHeader() {
+    return "tipo,valor,data,horario,clientesEnvolvidos";
+}
+
+ostream &operator<<(ostream &out, const Transacao &t) {
+    out << t.tipo << "," << t.valor << "," << t.data << "," << t.horario;
+
+    for (Cliente* c : t.clientesEnvolvidos)
+        out << "," << c->getNome();
+    out << "\n";
+
+    return out;
 }

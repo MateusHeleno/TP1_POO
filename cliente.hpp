@@ -41,8 +41,7 @@ public:
     double getRendimento();
     void setRendimento(double r);
 
-    string getHeader() override
-    {
+    string getHeader() override {
         return "nome,trabalho,login,senha,conta,remuneracao,saldo,taxa_rendimento";
     }
 

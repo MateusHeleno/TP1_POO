@@ -14,9 +14,9 @@ Cliente::Cliente(const string &n, const string &t, const string &l, const string
                                                                                             tipoDeConta(tipo),
                                                                                             temCartao(temCartao)
 {
-    
+
     setRemuneracao(rem);
-    
+
     if (temCartao)
     {
         cartao.criar(remuneracao);
@@ -26,7 +26,7 @@ Cliente::Cliente(const string &n, const string &t, const string &l, const string
 void Cliente::exibirDados()
 {
     cout << endl << "\t\tDados do Cliente" << endl;
-    
+
     Pessoa::exibirDados(); // adiciona a implementacao da classe mae
 
     // adiciona os dados especificos
@@ -54,7 +54,7 @@ void Cliente::setTipoDeConta(const string &tipo)
 {
     tipoDeConta = tipo;
     string tipoLower = toLowerString(tipoDeConta);
-    
+
     if (tipoLower == "corrente") {
         taxaDeRendimento = 0.0;
     } else if (tipoLower == "poupança") {
@@ -117,8 +117,7 @@ void Cliente::setRendimento(double r)
 }
 
 // realiza a sobrecarga do operador << para poder salvar os dados no arquivo csv usando {file << cliente} para melhor legibilidade do código
-ostream &operator<<(ostream &out, const Cliente &c)
-{
+ostream &operator<<(ostream &out, const Cliente &c) {
     out << c.getNome() << ','
         << c.getTrabalho() << ','
         << c.getLogin() << ','
@@ -164,14 +163,14 @@ Cliente cadastrarCliente()
 
         cin.clear();             // Limpa a flag de erro do cin
         limparBuffer();
-        
+
         cout << "Remuneração: ";
     }
 
     taxaRendimento = 0.0;
     if (toLowerString(tipoDeConta) == "poupança")
     {
-        taxaRendimento = remuneracao * 0.05;    
+        taxaRendimento = remuneracao * 0.05;
         cout << "Valor do seu Rendimento: " << taxaRendimento << endl;
     }
 
@@ -179,7 +178,7 @@ Cliente cadastrarCliente()
     while (!(cin >> saldo) || saldo < 0)
     {
         cout << "Erro: Digite um valor numérico válido e não negativo." << endl << endl;
- 
+
 
         cin.clear();             // Limpa a flag de erro do cin
         limparBuffer();

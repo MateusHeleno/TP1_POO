@@ -13,21 +13,22 @@
 
 using namespace std;
 
-int main()
-{
+int main() {
     int k = 0;
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
+    vector<Transacao *> transacoes;
+
     clientes.reserve(100);
     gerentes.reserve(100);
-
-    vector<Transacao *> transacoes;
+    // transacoes.reserve(100);
 
     carregarClientes(clientes);
     carregarGerentes(gerentes);
-    do
-    {
+    carregarTransacoes("transacoes.csv", transacoes, clientes);
+
+    do {
         // if (k != 0)
         //     sleep(1); // linux
 
@@ -48,89 +49,84 @@ int main()
 
         k++;
         limparTerminal();
-        switch (valor)
-        {
+        switch (valor) {
         // Cadastrar cliente
-        case 1:
-        {
-            Cliente novoCliente = cadastrarCliente();
-            novoCliente.exibirDados();
-            clientes.push_back(novoCliente);
+            case 1: {
+                Cliente novoCliente = cadastrarCliente();
+                novoCliente.exibirDados();
+                clientes.push_back(novoCliente);
 
-            break;
-        }
-        // Cadastrar gerente
-        case 2:
-        {
-            Gerente novoGerente = cadastrarGerente();
-            novoGerente.exibirDados();
-            gerentes.push_back(novoGerente);
+                break;
+            }
+            // Cadastrar gerente
+            case 2: {
+                Gerente novoGerente = cadastrarGerente();
+                novoGerente.exibirDados();
+                gerentes.push_back(novoGerente);
 
-            break;
-        }
-        // Criar transação
-        case 3:
-        {
-            Transacao *t = criarTransacao(clientes);
-            if (t != nullptr)
-            {
-                transacoes.push_back(t);
+                break;
+            }
+            // Criar transação
+            case 3: {
+                Transacao *t = criarTransacao(clientes);
+                if (t != nullptr)
+                {
+                    transacoes.push_back(t);
+                    for (Cliente *c : t->getClientes())
+                        c->setTransacao(t);
 
-                for (Cliente *c : t->getClientes())
-                    c->setTransacao(t);
-                t->exibirTransacao();
+                    t->exibirTransacao();
+                }
+
+                break;
+            }
+            // Exibir extrato de um cliente
+            case 4: {
+                mostrarDadosCliente(clientes);
+                break;
             }
 
-            break;
-        }
-        // Exibir extrato de um cliente
-        case 4:
-        {
-            mostrarDadosCliente(clientes);
-            break;
+            // Associar cliente a gerente
+            case 5: {
+                vincularCliente(clientes, gerentes);
+
+                break;
+            }
+            case 6: {
+                listarCliente(clientes);
+                break;
+            }
+
+            case 7: {
+                listarGerentes(gerentes);
+                break;
+            }
+
+            case 8: {
+                cartaoMain(clientes, gerentes);
+                break;
+            }
+
+            case 9: {
+                sleep(1);
+                escreverCSV("clientes.csv", clientes);
+                escreverCSV("gerentes.csv", gerentes);
+                for (Transacao* t : transacoes) {
+                    cout << "[DEBUG] " << t->getTipo() << " | clientes: ";
+                    for (Cliente* c : t->getClientes())
+                        cout << c->getNome() << " ";
+                    cout << endl;
+                }
+                escreverTransacoes("transacoes.csv", transacoes);
+
+                break;
+            }
+            default: {
+                break;
+            }
         }
 
-        // Associar cliente a gerente
-        case 5:
-        {
-            vincularCliente(clientes, gerentes);
-
-            break;
-        }
-        case 6:
-        {
-            listarCliente(clientes);
-            break;
-        }
-
-        case 7:
-        {
-            listarGerentes(gerentes);
-            break;
-        }
-
-        case 8:
-        {
-            cartaoMain(clientes, gerentes);
-            break;
-        }
-
-        case 9:
-        {
-            cout << "Salvando registros nos arquivos. Por favor aguarde..." << endl;
-            sleep(1);
-            escreverCSV("clientes.csv", clientes);
-            escreverCSV("gerentes.csv", gerentes);
-            break;
-        }
-        default:
-        {
-            break;
-        }
-        }
-
-        if (valor != 9)
-        {
+        if (valor != 9) {
             cout << endl
                  << "Pressione Enter para voltar ao menu!" << endl;
 
@@ -138,8 +134,7 @@ int main()
         }
     } while (valor != 9);
 
-    for (Transacao *t : transacoes) // exclui transacoes alocadas dinamicamente
-    {
+    for (Transacao *t : transacoes) { // exclui transacoes alocadas dinamicamente
         delete t;
     }
 
