@@ -11,25 +11,20 @@
 
 using namespace std;
 
-void limparTerminal()
-{
+void limparTerminal() {
     system("clear");
 }
 
-void limparBuffer()
-{
+void limparBuffer() {
     cin.ignore(100, '\n');
 }
 
-int lerValor(int n)
-{
+int lerValor(int n) {
     int valor;
-    while (true)
-    {
+    while (true) {
         cout << "- ";
         cin >> valor;
-        if (cin.fail())
-        {
+        if (cin.fail()) {
             limparTerminal();
             limparBuffer();
             cout << "Entrada inválida, digite um número: " << endl;
@@ -42,8 +37,7 @@ int lerValor(int n)
 }
 
 
-string toLowerString(string s)
-{
+string toLowerString(string s) {
     // usando "auto" o compilador deduz automaticamente o tipo da varíavel e usando & passamos por referência, permitindo modificação no objeto
     for (auto &c : s)
         c = tolower(c);
@@ -55,15 +49,13 @@ void carregarClientes(vector<Cliente> &clientes) {
     ifstream file("arquivos/clientes.csv");
 
     if (!file.is_open()) // verifica se o arquivo existe
-    {
         return;
-    }
 
     string linha;
     getline(file, linha); // descarta o cabecalho
 
-    while (getline(file, linha)) // leitura do arquivo
-    {
+    while (getline(file, linha)) { // leitura do arquivo
+
         stringstream ss(linha);
         string nome, trabalho, login, senha, tipoConta;
         string rem_str, saldo_str, taxa_str;

@@ -62,7 +62,7 @@ void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes){
             default:
                 break;
         }
-        if (valor != 9) {
+        if (valor != 7) {
             cout << endl
                  << "Pressione Enter para voltar ao menu!" << endl;
 
@@ -452,66 +452,69 @@ void acessarFatura(vector<Cliente>& clientes) {
     limparBuffer();
     limparTerminal();
 
-    cout << endl << "===== ACESSAR FATURA =====" << endl;
+    cout << "===== ACESSAR FATURA =====" << endl;
 
     cout << "Nome do cliente: ";
     getline(cin, nomeCliente);
 
     Cliente* cliente = buscaPessoa(clientes, nomeCliente);
 
-    if (cliente == nullptr) {
+    if (cliente == nullptr)
         return;
-    }
 
     if (!cliente->possuiCartao()) {
         cout << "Este cliente ainda não possui cartão de crédito." << endl;
         return;
     }
 
-    cout << "===== MENU DA FATURA =====" << endl;
-    cout << "1. Ver fatura" << endl;
-    cout << "2. Gerar fatura" << endl;
-    cout << "3. Pagar fatura" << endl;
-    cout << "4. Listar compras parceladas" << endl;
+    int opcao;
+    do {
+        limparTerminal();
+        cout << "===== MENU DA FATURA =====" << endl;
+        cout << "1. Ver fatura" << endl;
+        cout << "2. Gerar fatura" << endl;
+        cout << "3. Pagar fatura" << endl;
+        cout << "4. Listar compras parceladas" << endl;
+        cout << "5. Voltar para o Menu de Crédito" << endl;
 
-    int opcao = lerValor(4);
+        opcao = lerValor(5);
 
-    switch (opcao) {
-        case 1: {
-            cliente->getCartao().exibirFatura();
-            break;
-        }
-
-        case 2: {
-            cliente->getCartao().gerarFatura();
-            break;
-        }
-
-        case 3: {
-            double saldoAtual = cliente->getSaldo();
-
-            if (cliente->getCartao().pagarFatura(saldoAtual)) {
-                cliente->setSaldo(saldoAtual);
+        limparBuffer();
+        switch (opcao) {
+            case 1: {
+                cliente->getCartao().exibirFatura();
+                break;
             }
 
-            break;
+            case 2: {
+                cliente->getCartao().gerarFatura();
+                break;
+            }
+
+            case 3: {
+                double saldoAtual = cliente->getSaldo();
+
+                if (cliente->getCartao().pagarFatura(saldoAtual))
+                    cliente->setSaldo(saldoAtual);
+
+                break;
+            }
+
+            case 4: {
+                cliente->getCartao().exibirComprasParceladas();
+                break;
+            }
+
+            default:
+                break;
         }
-
-        case 4: {
-            cliente->getCartao().exibirComprasParceladas();
-            break;
-        }
-
-        default:
-            break;
-
-        cout << endl
+        if (opcao != 5) {
+            cout << endl
                 << "Pressione Enter para voltar ao menu!" << endl;
 
-        cin.get();
-    }
-
-
+            cin.get();
+        }
+    } while (opcao != 5);
 }
 
 /*
@@ -543,6 +546,7 @@ bool CartaoCredito::pagarFatura(double& saldoCliente) {
 
 
 void CartaoCredito::exibirFatura() const {
+    limparTerminal();
     cout << "===== FATURA DO CARTÃO =====" << endl;
     cout << "Valor da fatura: R$ " << valorFatura << endl;
     cout << "Limite total: R$ " << limiteTotal << endl;
@@ -552,6 +556,11 @@ void CartaoCredito::exibirFatura() const {
         cout << "Status: Bloqueado" << endl;
     else
         cout << "Status: Ativo" << endl;
+
+    // cout << endl
+    //      << "Pressione Enter para voltar ao menu!" << endl;
+
+    // cin.get();
 }
 
 // Compras parceladas ----------------------------------------------------------
@@ -599,6 +608,7 @@ bool CartaoCredito::realizarCompraParcelada(string descricao, double valorTotal,
 }
 
 void CartaoCredito::gerarFatura() {
+    limparTerminal();
     if (faturaGerada) {
         cout << "A fatura já foi gerada e ainda não foi paga." << endl;
         cout << "Valor atual da fatura: R$ " << valorFatura << endl;
@@ -622,6 +632,8 @@ void CartaoCredito::gerarFatura() {
 
     cout << "Fatura gerada com sucesso!" << endl;
     cout << "Valor da fatura: R$ " << valorFatura << endl;
+
+    // cin.get();
 }
 
 void CompraParcelada::pagarUmaParcela() {
@@ -714,6 +726,8 @@ void realizarCompraParcelada(vector<Cliente>& clientes) {
         cout << "Entrada inválida para a quantidade de parcelas." << endl;
         return;
     }
+
+    limparBuffer();
 
     bool compraRealizada = cliente->getCartao().realizarCompraParcelada(
         descricao,
