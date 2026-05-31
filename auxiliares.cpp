@@ -8,6 +8,7 @@
 #include "pessoa.hpp"
 #include "cliente.hpp"
 #include "gerente.hpp"
+#include "auxiliares.hpp"
 
 using namespace std;
 
@@ -155,4 +156,102 @@ void carregarTransacoes(const string& arquivo, vector<Transacao*>& transacoes, v
     }
 
     file.close();
+}
+
+void escreverCartoes(vector<Cliente>& clientes) {
+    ofstream fileCartoes("arquivos/cartoes.csv");
+    ofstream fileCompras("arquivos/compras.csv");
+
+    // escreve os headers no csv
+    fileCartoes << "nome,temCartao,limiteTotal,limiteDisponivel,valorFatura,bloqueado,faturaGerada\n";
+    fileCompras << "nome,descricao,valorTotal,qtdParcelas,parcelasPagas\n";
+
+    for (Cliente& c : clientes) {
+        // salva o booleano tem cartao -> 0 ou 1
+        fileCartoes << c.getNome() << "," << c.possuiCartao();
+
+        if (c.possuiCartao()) {
+            CartaoCredito& cartao = c.getCartao();
+            fileCartoes << "," << cartao.getLimiteTotal()
+                        << "," << cartao.getLimiteDisponivel()
+                        << "," << cartao.getValorFatura()
+                        << "," << cartao.estaBloqueado()
+                        << "," << cartao.isFaturaGerada();
+
+            // Salva as compras relacionadas com o nome do cliente
+            for (const CompraParcelada& comp : cartao.getCompras()) {
+                fileCompras << c.getNome() << ","
+                            << comp.getDescricao() << ","
+                            << comp.getValorTotal() << ","
+                            << comp.getQuantidadeParcelas() << ","
+                            << comp.getParcelasPagas() << "\n";
+            }
+        } else {
+            // Se não tem cartão, preenche o resto da linha com zeros
+            fileCartoes << ",0,0,0,0,0";
+        }
+        fileCartoes << "\n";
+    }
+    fileCartoes.close();
+    fileCompras.close();
+}
+
+void carregarCartoes(vector<Cliente>& clientes) {
+    ifstream fileCartoes("arquivos/cartoes.csv");
+
+    if (!fileCartoes.is_open())
+        return;
+
+    string linha;
+    getline(fileCartoes, linha); // Pula cabeçalho
+
+    while (getline(fileCartoes, linha)) {
+        if (linha.empty())
+            continue;
+
+        stringstream ss(linha);
+        string nome, temCartaoStr, limTotalStr, limDispStr, valFaturaStr, bloqStr, fatGeradaStr;
+
+        getline(ss, nome, ',');
+        getline(ss, temCartaoStr, ',');
+        getline(ss, limTotalStr, ',');
+        getline(ss, limDispStr, ',');
+        getline(ss, valFaturaStr, ',');
+        getline(ss, bloqStr, ',');
+        getline(ss, fatGeradaStr, ',');
+
+        // Se temCartaoStr for "1", restaura os dados
+        if (temCartaoStr == "1") {
+            Cliente* c = buscaPessoa(clientes, nome);
+            if (c != nullptr) {
+                c->restaurarCartao(stod(limTotalStr), stod(limDispStr), stod(valFaturaStr), bloqStr == "1", fatGeradaStr == "1");
+            }
+        }
+    }
+    fileCartoes.close();
+
+    // Carregar as compras em cada cartão respectivo
+    ifstream fileCompras("arquivos/compras.csv");
+    if (!fileCompras.is_open())
+        return;
+
+    getline(fileCompras, linha); // Pula cabeçalho
+
+    while (getline(fileCompras, linha)) {
+        if (linha.empty()) continue;
+        stringstream ss(linha);
+        string nome, desc, valTotStr, qtdParcStr, pagasStr;
+
+        getline(ss, nome, ',');
+        getline(ss, desc, ',');
+        getline(ss, valTotStr, ',');
+        getline(ss, qtdParcStr, ',');
+        getline(ss, pagasStr);
+
+        Cliente* c = buscaPessoa(clientes, nome);
+        if (c != nullptr && c->possuiCartao()) {
+            c->getCartao().restaurarCompra(desc, stod(valTotStr), stoi(qtdParcStr), stoi(pagasStr));
+        }
+    }
+    fileCompras.close();
 }

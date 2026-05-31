@@ -27,6 +27,7 @@ int main() {
     carregarClientes(clientes);
     carregarGerentes(gerentes);
     carregarTransacoes("arquivos/transacoes.csv", transacoes, clientes);
+    carregarCartoes(clientes);
 
     do {
         // if (k != 0)
@@ -113,6 +114,7 @@ int main() {
                 escreverCSV("arquivos/clientes.csv", clientes);
                 escreverCSV("arquivos/gerentes.csv", gerentes);
                 escreverTransacoes("arquivos/transacoes.csv", transacoes);
+                escreverCartoes(clientes);
 
                 break;
             }

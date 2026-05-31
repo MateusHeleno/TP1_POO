@@ -26,6 +26,7 @@ public:
     double getValorParcela() const;
     int getParcelasPagas() const;
     int getParcelasRestantes() const;
+    void setParcelasPagas(int pagas);
 
     bool estaQuitada() const;
     void pagarUmaParcela();
@@ -61,6 +62,11 @@ public:
     void exibirComprasParceladas() const;
     bool pagarFatura(double& saldoCliente);
     void exibirFatura() const;
+
+    bool isFaturaGerada() const;
+    const vector<CompraParcelada>& getCompras() const;
+    void restaurarDados(double limTot, double limDisp, double valFat, bool bloq, bool fatGerada);
+    void restaurarCompra(string desc, double valTot, int qtdParc, int parcPagas);
 
     //Parcelas
     bool realizarCompraParcelada(string descricao, double valorTotal, int parcelas);

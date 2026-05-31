@@ -227,10 +227,8 @@ void mostrarDadosCliente(vector<Cliente> &clientes)
 
 // Cartão de crédito -------------------------------------
 
-void Cliente::criarCartao()
-{
-    if (temCartao)
-    {
+void Cliente::criarCartao() {
+    if (temCartao) {
         cout << "Este cliente já possui cartão de crédito." << endl;
         return;
     }
@@ -241,12 +239,15 @@ void Cliente::criarCartao()
     cout << "Cartão criado com sucesso!" << endl;
 }
 
-bool Cliente::possuiCartao() const
-{
+bool Cliente::possuiCartao() const {
     return temCartao;
 }
 
-CartaoCredito &Cliente::getCartao()
-{
+CartaoCredito &Cliente::getCartao() {
     return cartao;
+}
+
+void Cliente::restaurarCartao(double limTot, double limDisp, double valFat, bool bloq, bool fatGerada) {
+    temCartao = true;
+    cartao.restaurarDados(limTot, limDisp, valFat, bloq, fatGerada);
 }

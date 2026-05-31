@@ -46,5 +46,7 @@ void carregarClientes(vector<Cliente>& clientes);
 void carregarGerentes(vector<Gerente>& gerentes);
 void escreverTransacoes(const string& arquivo, const vector<Transacao*>& transacoes);
 void carregarTransacoes(const string& arquivo, vector<Transacao*>& transacoes, vector<Cliente>& clientes);
+void carregarCartoes(vector<Cliente>& clientes);
+void escreverCartoes(vector<Cliente>& clientes);
 
 #endif

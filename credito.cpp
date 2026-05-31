@@ -442,6 +442,32 @@ double CartaoCredito::getValorFatura() const {
     return valorFatura;
 }
 
+void CompraParcelada::setParcelasPagas(int pagas) {
+    parcelasPagas = pagas;
+}
+
+bool CartaoCredito::isFaturaGerada() const {
+    return faturaGerada;
+}
+
+const vector<CompraParcelada>& CartaoCredito::getCompras() const {
+    return comprasParceladas;
+}
+
+void CartaoCredito::restaurarDados(double limTot, double limDisp, double valFat, bool bloq, bool fatGerada) {
+    limiteTotal = limTot;
+    limiteDisponivel = limDisp;
+    valorFatura = valFat;
+    bloqueado = bloq;
+    this->faturaGerada = fatGerada;
+}
+
+void CartaoCredito::restaurarCompra(string desc, double valTot, int qtdParc, int parcPagas) {
+    CompraParcelada cp(desc, valTot, qtdParc);
+    cp.setParcelasPagas(parcPagas);
+    comprasParceladas.push_back(cp);
+}
+
 //-----------------------------------------------------------------------------
 
 // pagar fatura ----------------------------------------------------------------
@@ -517,34 +543,6 @@ void acessarFatura(vector<Cliente>& clientes) {
     } while (opcao != 5);
 }
 
-/*
-bool CartaoCredito::pagarFatura(double& saldoCliente) {
-    if (valorFatura <= 0) {
-        cout << "Não há fatura em aberto." << endl;
-        return false;
-    }
-
-    if (saldoCliente < valorFatura) {
-        cout << "Saldo insuficiente para pagar a fatura." << endl;
-        return false;
-    }
-
-    saldoCliente -= valorFatura;
-
-    limiteDisponivel += valorFatura;
-
-    if (limiteDisponivel > limiteTotal) {
-        limiteDisponivel = limiteTotal;
-    }
-
-    valorFatura = 0.0;
-
-    cout << "Fatura paga com sucesso!" << endl;
-    return true;
-}
-*/
-
-
 void CartaoCredito::exibirFatura() const {
     limparTerminal();
     cout << "===== FATURA DO CARTÃO =====" << endl;
@@ -556,11 +554,6 @@ void CartaoCredito::exibirFatura() const {
         cout << "Status: Bloqueado" << endl;
     else
         cout << "Status: Ativo" << endl;
-
-    // cout << endl
-    //      << "Pressione Enter para voltar ao menu!" << endl;
-
-    // cin.get();
 }
 
 // Compras parceladas ----------------------------------------------------------

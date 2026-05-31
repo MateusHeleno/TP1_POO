@@ -52,6 +52,7 @@ public:
     bool possuiCartao() const; // get de possui cartão
     CartaoCredito &getCartao();
     void criarCartao();
+    void restaurarCartao(double limTot, double limDisp, double valFat, bool bloq, bool fatGerada);
 };
 
 bool clienteVinculadoAoGerente(Gerente &gerente, Cliente *cliente);
