@@ -83,9 +83,7 @@ void vincularCliente(vector<Cliente> &clientes, vector<Gerente> &gerentes) {
     cout << "Cliente '" << nomeC << "' associado com sucesso ao Gerente '" << nomeG << "'!" << endl;
 }
 
-void listarGerentes(vector<Gerente> &gerentes)
-{
-    limparBuffer();
+void listarGerentes(vector<Gerente> &gerentes) {
     cout << "=== LISTA DE GERENTES CADASTRADOS ===" << endl;
     if (gerentes.empty())
         cout << "Nenhum gerente cadastrado no sistema." << endl;

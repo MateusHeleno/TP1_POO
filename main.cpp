@@ -123,9 +123,9 @@ int main() {
             }
         }
 
-        if (valor != 9) {
+        if (valor != 9 && valor != 8) {
             cout << endl
-                 << "Pressione Enter para voltar ao menu!" << endl;
+                 << "Pressione Enter para voltar ao menu! PORRA" << endl;
 
             cin.get();
         }
