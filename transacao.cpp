@@ -136,20 +136,6 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
 
     // Transacao t(tipo, valor, data, horario);
 
-    // if (tipoLower == "transferencia") {
-    //     if (!processarTransferencia(t, clientes, valor))
-    //         return nullptr;
-    // }
-
-    // else if (tipoLower == "saque") {
-    //     if (!processarSaque(t, clientes, valor))
-    //         return nullptr;
-    // }
-
-    // else if (tipoLower == "deposito") {
-    //     if (!processarDeposito(t, clientes, valor))
-    //         return nullptr;
-    // }
 
     // return new Transacao(t);
     double valor;
@@ -190,23 +176,22 @@ Transacao *criarTransacao(vector<Cliente> &clientes) {
         cin >> horario;
     }
 
-    // ✅ aloca no heap direto — sem cópia depois
     Transacao *t = new Transacao(tipo, valor, data, horario);
 
-    bool sucesso = false;
-
-    if (tipoLower == "transferencia")
-        sucesso = processarTransferencia(*t, clientes, valor);
-    else if (tipoLower == "saque")
-        sucesso = processarSaque(*t, clientes, valor);
-    else if (tipoLower == "deposito")
-        sucesso = processarDeposito(*t, clientes, valor);
-
-    if (!sucesso) {
-        delete t;
-        return nullptr;
+    if (tipoLower == "transferencia") {
+        if (!processarTransferencia(*t, clientes, valor))
+            return nullptr;
     }
 
+    else if (tipoLower == "saque") {
+        if (!processarSaque(*t, clientes, valor))
+            return nullptr;
+    }
+
+    else if (tipoLower == "deposito") {
+        if (!processarDeposito(*t, clientes, valor))
+            return nullptr;
+    }
     return t;
 }
 
@@ -220,11 +205,8 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
     solicitarCliente(clientes, c1, "Cliente 1 (Pagador): ");
     solicitarCliente(clientes, c2, "Cliente 2 (Destinatário): ");
 
-    while (!verificaSaldo(*c1, valor))
-    {
-        cout << "Digite um novo valor para o saldo " << endl;
-        cin >> valor;
-    }
+    if (!verificaSaldo(*c1, valor))
+        return false;
 
     // c1->setTransacao(&t);
     // c2->setTransacao(&t);
@@ -241,11 +223,9 @@ bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
     limparBuffer();
     solicitarCliente(clientes, c, "Nome do dono da conta: ");
 
-    while (!verificaSaldo(*c, valor))
-    {
-        cout << "Digite um novo valor para o saldo " << endl;
-        cin >> valor;
-    }
+    if (!verificaSaldo(*c, valor))
+        return false;
+
     // c->setTransacao(&t);
     c->setSaldo(c->getSaldo() - valor);
     t.setClientes(c);
@@ -253,11 +233,9 @@ bool processarSaque(Transacao &t, vector<Cliente> &clientes, double valor) {
     return true;
 }
 
-void solicitarCliente(vector<Cliente> &clientes, Cliente *&c, string mensagem)
-{
+void solicitarCliente(vector<Cliente> &clientes, Cliente *&c, string mensagem) {
     string pessoa;
-    do
-    {
+    do {
         cout << mensagem;
         getline(cin, pessoa);
 
@@ -279,7 +257,7 @@ bool processarDeposito(Transacao &t, vector<Cliente> &clientes, double valor) {
 
 bool verificaSaldo(Cliente &c, double valor) {
     if (c.getSaldo() - valor < 0) {
-        cout << "Você não tem saldo suficiente para essa operação." << endl;
+        cout << "O cliente " << c.getNome() << " não tem saldo suficiente para essa operação." << endl;
         return false;
     }
     return true;
