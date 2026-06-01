@@ -137,7 +137,6 @@ Cliente cadastrarCliente()
     string nome, trabalho, login, senha, tipoDeConta;
     double remuneracao, taxaRendimento, saldo;
 
-    limparBuffer();
     cout << "Nome: ";
     getline(cin, nome);
     cout << "Trabalho: ";
@@ -193,9 +192,7 @@ Cliente cadastrarCliente()
     return Cliente(nome, trabalho, login, senha, remuneracao, tipoDeConta, taxaRendimento, saldo, false);
 }
 
-void listarCliente(vector<Cliente> &clientes)
-{
-    limparBuffer();
+void listarCliente(vector<Cliente> &clientes) {
     cout << "=== LISTA DE CLIENTES CADASTRADOS ===" << endl;
     if (clientes.empty())
         cout << "Nenhum cliente cadastrado no sistema." << endl;
@@ -210,10 +207,8 @@ void listarCliente(vector<Cliente> &clientes)
     }
 }
 
-void mostrarDadosCliente(vector<Cliente> &clientes)
-{
+void mostrarDadosCliente(vector<Cliente> &clientes) {
     string nome;
-    limparBuffer();
     cout << "Insira o nome do cliente: ";
     getline(cin, nome);
 

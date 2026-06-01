@@ -76,7 +76,6 @@ void cartaoMain(vector<Cliente>& clientes, vector<Gerente>& gerentes){
 void criarCartaoParaCliente(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
     string nomeGerente, nomeCliente;
 
-    limparBuffer();
     limparTerminal();
 
     cout << "Nome do gerente: ";
@@ -163,7 +162,6 @@ void bloquearCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
     if (opcao == 1) {
         string nomeCliente;
 
-        limparBuffer();
         cout << "Nome do cliente: ";
         getline(cin, nomeCliente);
 
@@ -189,8 +187,6 @@ void bloquearCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
     else if (opcao == 2) {
         string nomeGerente;
         string nomeCliente;
-
-        limparBuffer();
 
         cout << "Nome do gerente: ";
         getline(cin, nomeGerente);
@@ -242,7 +238,6 @@ void desbloquearCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
     if (opcao == 1) {
         string nomeCliente;
 
-        limparBuffer();
         cout << "Nome do cliente: ";
         getline(cin, nomeCliente);
 
@@ -268,8 +263,6 @@ void desbloquearCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
     else if (opcao == 2) {
         string nomeGerente;
         string nomeCliente;
-
-        limparBuffer();
 
         cout << "Nome do gerente: ";
         getline(cin, nomeGerente);
@@ -339,7 +332,6 @@ void alterarLimiteCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
     string nomeCliente;
     double novoLimite;
 
-    limparBuffer();
     limparTerminal();
 
     cout << "Nome do gerente: ";
@@ -475,7 +467,6 @@ void CartaoCredito::restaurarCompra(string desc, double valTot, int qtdParc, int
 void acessarFatura(vector<Cliente>& clientes) {
     string nomeCliente;
 
-    limparBuffer();
     limparTerminal();
 
     cout << "===== ACESSAR FATURA =====" << endl;
@@ -505,7 +496,6 @@ void acessarFatura(vector<Cliente>& clientes) {
 
         opcao = lerValor(5);
 
-        limparBuffer();
         switch (opcao) {
             case 1: {
                 cliente->getCartao().exibirFatura();
@@ -674,7 +664,6 @@ void realizarCompraParcelada(vector<Cliente>& clientes) {
     int parcelas;
 
     limparTerminal();
-    limparBuffer();
 
     cout << "===== REALIZAR COMPRA PARCELADA =====" << endl;
 
@@ -719,8 +708,6 @@ void realizarCompraParcelada(vector<Cliente>& clientes) {
         cout << "Entrada inválida para a quantidade de parcelas." << endl;
         return;
     }
-
-    limparBuffer();
 
     bool compraRealizada = cliente->getCartao().realizarCompraParcelada(
         descricao,

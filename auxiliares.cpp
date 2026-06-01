@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <algorithm>
+#include <format>
 #include <sstream>
 
 #include "pessoa.hpp"
@@ -22,19 +23,30 @@ void limparBuffer() {
 
 int lerValor(int n) {
     int valor;
+    string entrada;
+
     while (true) {
-        cout << "- ";
-        cin >> valor;
-        if (cin.fail()) {
-            cin.clear();
-            limparBuffer();
-            cout << "Entrada inválida, digite um número: " << endl;
+        try {
+            cout << "- ";
+            getline(cin, entrada);
+            size_t pos;                  // stoi pede uma variável do tipo size_t, por isso nao pode ser int
+            valor = stoi(entrada, &pos); // o pos armazena o índice do primeiro char dps do ultimo número lido
+
+            // se pos for diferente do tamanho da entrada, significa que o usuário enviou uma entrada incorreta, como 1aa
+            // nesse caso, pos seria 1, e entrada.size() 3, então é uma entrada inválida
+            if (pos != entrada.size())
+                throw invalid_argument("Insira uma entrada válida.");
+
+            else if (valor >= 1 && valor <= n)
+                return valor;
+            else
+                cout << "Valor inválido! Escolha entre 1 e " << n << ": " << endl;
+        } catch(exception &e) {
+            cerr << "Valor inválido! Escolha entre 1 e " << n << ": " << endl;
         }
-        else if (valor >= 1 && valor <= n)
-            return valor;
-        else
-            cout << "Valor inválido! Escolha entre 1 e " << n << ": " << endl;
     }
+
+    return -1;
 }
 
 string toLowerString(string s) {

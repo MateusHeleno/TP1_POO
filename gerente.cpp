@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-Gerente::Gerente(const string &n, const string &l, const string &s) 
+Gerente::Gerente(const string &n, const string &l, const string &s)
 : Pessoa(n, "Gerente", l, s)
 
 {
@@ -54,11 +54,9 @@ ostream &operator<<(ostream &out, const Gerente &g)
     return out;
 }
 
-Gerente cadastrarGerente()
-{
+Gerente cadastrarGerente() {
     string nome, login, senha;
 
-    limparBuffer();
     cout << "Nome: ";
     getline(cin,nome);
     cout << "Login: ";
@@ -69,10 +67,8 @@ Gerente cadastrarGerente()
     return Gerente(nome, login, senha);
 }
 
-void vincularCliente(vector<Cliente> &clientes, vector<Gerente> &gerentes)
-{
+void vincularCliente(vector<Cliente> &clientes, vector<Gerente> &gerentes) {
     string nomeG, nomeC;
-    limparBuffer();
     cout << "Nome do Gerente: ";
     getline(cin, nomeG);
     cout << "Nome do Cliente: ";
