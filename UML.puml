@@ -1,16 +1,16 @@
 @startuml UML
-' --- CONFIGURAÇÕES DE ESTILO MELHORADAS ---
+' --- CONFIGURAÇÕES DE ESTILO ---
 skinparam shadowing false
 skinparam roundcorner 8
 skinparam defaultFontName Helvetica
 skinparam classAttributeIconSize 0
 
-' Evita sobreposição forçando linhas ortogonais (ângulos de 90 graus)
+' Mantém linhas retas
 skinparam linetype ortho
 
-' Aumentando o espaçamento
-skinparam nodesep 80
-skinparam ranksep 100
+' Espaçamentos ajustados para acomodar os multiplicadores
+skinparam nodesep 70
+skinparam ranksep 80
 
 skinparam class {
     BackgroundColor #FAFAFA
@@ -150,16 +150,25 @@ class CartaoCredito {
   + realizarCompraParcelada(descricao: string, valorTotal: double, parcelas: int) : bool
 }
 
-' Relacionamentos UML com espaços nos multiplicadores para afastar o texto
-Pessoa <|--- Cliente 
-Pessoa <|--- Gerente 
+' ==========================================
+' RELACIONAMENTOS MAPEADOS CONFORME O ESBOÇO
+' ==========================================
 
-Gerente " 1 " o--- " * " Cliente : gerencia >
+' Pessoa no topo
+Pessoa <|-down- Cliente 
+Pessoa <|-down- Gerente 
 
-Cliente " 1 " *--- " 1 " CartaoCredito : compõe >
-CartaoCredito " 1 " *--- " * " CompraParcelada : compõe >
+' Gerente posicionado à direita do Cliente
+Cliente " * " <-right-o " 1 " Gerente : gerencia >
 
-Cliente " * " o--- " * " Transacao : realiza >
-Transacao " * " o--- " * " Cliente : envolve >
+' Cliente apontando para baixo para Transacao e Cartão
+Cliente " * " o-down- " * " Transacao : realiza >
+Cliente " 1 " *-down- " 1 " CartaoCredito : compõe >
+
+' FORÇA A ORDEM HORIZONTAL NA BASE: Transacao (1º) -> CartaoCredito (2º)
+Transacao -[hidden]right- CartaoCredito
+
+' CompraParcelada (3º) à direita do Cartão
+CartaoCredito " 1 " *-right- " * " CompraParcelada : compõe >
 
 @enduml
