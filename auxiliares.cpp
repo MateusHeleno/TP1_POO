@@ -26,7 +26,7 @@ int lerValor(int n) {
         cout << "- ";
         cin >> valor;
         if (cin.fail()) {
-            limparTerminal();
+            cin.clear();
             limparBuffer();
             cout << "Entrada inválida, digite um número: " << endl;
         }
@@ -36,7 +36,6 @@ int lerValor(int n) {
             cout << "Valor inválido! Escolha entre 1 e " << n << ": " << endl;
     }
 }
-
 
 string toLowerString(string s) {
     // usando "auto" o compilador deduz automaticamente o tipo da varíavel e usando & passamos por referência, permitindo modificação no objeto
