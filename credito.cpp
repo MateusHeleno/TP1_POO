@@ -77,6 +77,7 @@ void criarCartaoParaCliente(vector<Cliente>& clientes, vector<Gerente>& gerentes
     string nomeGerente, nomeCliente;
 
     limparTerminal();
+    
 
     cout << "Nome do gerente: ";
     getline(cin, nomeGerente);
@@ -94,6 +95,10 @@ void criarCartaoParaCliente(vector<Cliente>& clientes, vector<Gerente>& gerentes
 
     if (!clienteVinculadoAoGerente(*gerente, cliente)) {
         cout << "Este cliente não está vinculado a esse gerente." << endl;
+        return;
+    }
+    if (cliente->possuiCartao()) {
+        cout << "Este cliente já possui cartão de crédito." << endl;
         return;
     }
 
@@ -119,7 +124,10 @@ bool clienteVinculadoAoGerente(Gerente& gerente, Cliente* cliente) {
 
 
 void CartaoCredito::criar(double remuneracao){
-
+    if (remuneracao <= 0) {
+        cout << "Erro: cliente sem remuneração válida para criação de cartão." << endl;
+        return;
+    }
     limiteTotal = remuneracao * 2;
     limiteDisponivel = limiteTotal;
     valorFatura = 0.0;
@@ -376,10 +384,12 @@ void alterarLimiteCartao(vector<Cliente>& clientes, vector<Gerente>& gerentes) {
 
     if (cin.fail()) {
         cin.clear();
-        cin.ignore(100, '\n');
+        cin.ignore(1000, '\n');
         cout << "Entrada inválida para limite." << endl;
         return;
     }
+    cin.ignore(1000, '\n');
+
 
     if (novoLimite > limiteMaximoPermitido) {
         cout << "Erro: o novo limite ultrapassa o limite máximo permitido para este cliente." << endl;
@@ -435,7 +445,16 @@ double CartaoCredito::getValorFatura() const {
 }
 
 void CompraParcelada::setParcelasPagas(int pagas) {
-    parcelasPagas = pagas;
+    if (pagas < 0) {
+        parcelasPagas = 0;
+    }
+    else if (pagas > quantidadeParcelas) {
+        parcelasPagas = quantidadeParcelas;
+    }
+    else {
+        parcelasPagas = pagas;
+    }
+
 }
 
 bool CartaoCredito::isFaturaGerada() const {
@@ -573,6 +592,10 @@ bool CartaoCredito::realizarCompraParcelada(string descricao, double valorTotal,
         cout << "Quantidade de parcelas inválida." << endl;
         return false;
     }
+    if (parcelas > 24) {
+        cout << "Quantidade máxima de parcelas permitida é 24." << endl;
+        return false;
+    }
 
     if (valorTotal > limiteDisponivel) {
         cout << "Limite insuficiente para essa compra." << endl;
@@ -708,6 +731,7 @@ void realizarCompraParcelada(vector<Cliente>& clientes) {
         cout << "Entrada inválida para a quantidade de parcelas." << endl;
         return;
     }
+    cin.ignore(1000, '\n');
 
     bool compraRealizada = cliente->getCartao().realizarCompraParcelada(
         descricao,
