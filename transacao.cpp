@@ -84,60 +84,6 @@ void Transacao::exibirTransacao() {
 }
 
 Transacao *criarTransacao(vector<Cliente> &clientes) {
-    // double valor;
-    // string tipo, data, horario;
-
-    // cout << "Tipo da Transação (Transferencia, Deposito, Saque): ";
-    // cin >> tipo;
-    // string tipoLower = toLowerString(tipo);
-
-    // // Fica em loop enquanto a palavra digitada NÃO for nenhuma das três permitidas
-    // while (tipoLower != "transferencia" && tipoLower != "deposito" && tipoLower != "saque")
-    // {
-    //     cout << "Erro: Transação inválida. Escolha entre Transferencia, Deposito ou Saque." << endl << endl;
-
-    //     cout << "Tipo da Transação (Transferencia, Depósito, Saque): ";
-    //     cin >> tipo;
-    //     tipoLower = toLowerString(tipo); // Atualiza a variável para testar de novo no while
-    // }
-
-    // cout << "Valor: ";
-    // while (!(cin >> valor) || valor <= 0)
-    // {
-    //     cout << "Erro: O valor da transação deve ser numérico e maior que zero." << endl << endl;
-
-    //     cin.clear();             // Limpa a flag de erro do cin
-    //     limparBuffer();          // Descarta o lixo do buffer
-
-    //     cout << "Valor: ";
-    // }
-
-    // cout << "Data (DD/MM/AAAA): ";
-    // cin >> data;
-    // // Verifica se a string tem exatamente 10 caracteres e se as barras estão nas posições corretas
-    // while (data.length() != 10 || data[2] != '/' || data[5] != '/')
-    // {
-    //     cout << "Erro: Formato de data inválido. Use exatamente o padrão DD/MM/AAAA." << endl << endl;
-
-    //     cout << "Data (DD/MM/AAAA): ";
-    //     cin >> data;
-    // }
-
-    // cout << "Horário (HH:MM): ";
-    // cin >> horario;
-    // // Verifica se a string tem exatamente 5 caracteres e se os dois-pontos estão na posição correta
-    // while (horario.length() != 5 || horario[2] != ':')
-    // {
-    //     cout << "Erro: Formato de horário inválido. Use exatamente o padrão HH:MM." << endl << endl;
-
-    //     cout << "Horário (HH:MM): ";
-    //     cin >> horario;
-    // }
-
-    // Transacao t(tipo, valor, data, horario);
-
-
-    // return new Transacao(t);
     double valor;
     string tipo, data, horario;
 
@@ -204,6 +150,11 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
 
     solicitarCliente(clientes, c1, "Cliente 1 (Pagador): ");
     solicitarCliente(clientes, c2, "Cliente 2 (Destinatário): ");
+
+    if (c1 == c2) {
+        cout << "Os clientes não podem ser o mesmo" << endl;
+        return false;
+    }
 
     if (!verificaSaldo(*c1, valor))
         return false;

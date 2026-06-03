@@ -132,8 +132,7 @@ ostream &operator<<(ostream &out, const Cliente &c) {
     return out;
 }
 
-Cliente cadastrarCliente()
-{
+Cliente cadastrarCliente() {
     string nome, trabalho, login, senha, tipoDeConta;
     double remuneracao, taxaRendimento, saldo;
 
@@ -148,8 +147,7 @@ Cliente cadastrarCliente()
 
     cout << "Tipo de conta (Poupança ou Corrente): ";
     cin >> tipoDeConta;
-    while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente")
-    {
+    while (toLowerString(tipoDeConta) != "poupança" && toLowerString(tipoDeConta) != "corrente") {
         cout << "Erro, escolha entre os tipos disponíveis: Poupança ou Corrente" << endl
              << endl;
         cout << "Tipo de Conta: ";
@@ -157,8 +155,7 @@ Cliente cadastrarCliente()
     }
 
     cout << "Remuneração: ";
-    while (!(cin >> remuneracao) || remuneracao < 0)
-    {
+    while (!(cin >> remuneracao) || remuneracao < 0) {
         cout << "Erro: Digite um valor numérico válido e não negativo." << endl << endl;
 
         cin.clear();             // Limpa a flag de erro do cin
@@ -168,18 +165,14 @@ Cliente cadastrarCliente()
     }
 
     taxaRendimento = 0.0;
-    if (toLowerString(tipoDeConta) == "poupança")
-    {
+    if (toLowerString(tipoDeConta) == "poupança") {
         taxaRendimento = remuneracao * 0.05;
         cout << "Valor do seu Rendimento: " << taxaRendimento << endl;
     }
 
     cout << "Saldo: ";
-    while (!(cin >> saldo) || saldo < 0)
-    {
+    while (!(cin >> saldo) || saldo < 0) {
         cout << "Erro: Digite um valor numérico válido e não negativo." << endl << endl;
-
-
         cin.clear();             // Limpa a flag de erro do cin
         limparBuffer();
 
