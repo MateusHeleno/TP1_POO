@@ -14,7 +14,9 @@
 using namespace std;
 
 int main() {
-    int k = 0;
+    /*
+    Inicializa os vetores de clientes, gerentes e transações para poder salvar e ler do arquivo
+    */
     int valor;
     vector<Cliente> clientes;
     vector<Gerente> gerentes;
@@ -22,17 +24,14 @@ int main() {
 
     clientes.reserve(100);
     gerentes.reserve(100);
-    // transacoes.reserve(100);
 
+    // Carrega o que tiver salvo no arquivo
     carregarClientes(clientes);
     carregarGerentes(gerentes);
     carregarTransacoes("arquivos/transacoes.csv", transacoes, clientes);
     carregarCartoes(clientes);
 
     do {
-        // if (k != 0)
-        //     sleep(1); // linux
-
         limparTerminal();
 
         cout << "====== SISTEMA DE GERENCIAMENTO DE BANCO ====== " << endl;
@@ -48,7 +47,6 @@ int main() {
         cout << "======================================================" << endl;
         valor = lerValor(9);
 
-        k++;
         limparTerminal();
         switch (valor) {
         // Cadastrar cliente

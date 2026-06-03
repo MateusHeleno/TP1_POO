@@ -18,9 +18,7 @@ Cliente::Cliente(const string &n, const string &t, const string &l, const string
     setRemuneracao(rem);
 
     if (temCartao)
-    {
         cartao.criar(remuneracao);
-    }
 }
 
 void Cliente::exibirDados()
@@ -51,8 +49,7 @@ string Cliente::getTipoDeConta()
     return tipoDeConta;
 }
 
-void Cliente::setTipoDeConta(const string &tipo)
-{
+void Cliente::setTipoDeConta(const string &tipo) {
     tipoDeConta = tipo;
     string tipoLower = toLowerString(tipoDeConta);
 
@@ -117,6 +114,7 @@ void Cliente::setRendimento(double r)
         taxaDeRendimento = r;
 }
 
+// função amiga da classe
 // realiza a sobrecarga do operador << para poder salvar os dados no arquivo csv usando {file << cliente} para melhor legibilidade do código
 ostream &operator<<(ostream &out, const Cliente &c) {
     out << c.getNome() << ','
@@ -190,10 +188,8 @@ void listarCliente(vector<Cliente> &clientes) {
     if (clientes.empty())
         cout << "Nenhum cliente cadastrado no sistema." << endl;
 
-    else
-    {
-        for (Cliente &c : clientes)
-        {
+    else {
+        for (Cliente &c : clientes) {
             c.exibirDados();
             cout << "-----------------------------------" << endl;
         }

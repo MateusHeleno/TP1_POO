@@ -152,7 +152,7 @@ bool processarTransferencia(Transacao &t, vector<Cliente> &clientes, double valo
     solicitarCliente(clientes, c2, "Cliente 2 (Destinatário): ");
 
     if (c1 == c2) {
-        cout << "Os clientes não podem ser o mesmo" << endl;
+        cout << "Os clientes não podem ser os mesmos" << endl;
         return false;
     }
 
